@@ -1,0 +1,25 @@
+body {
+	font-family: arial;
+	background: url(https://cdn0.tnwcdn.com/wp-content/blogs.dir/1/files/2015/06/Udacity.jpg);
+	background-repeat: no-repeat; 
+	background-size: cover;
+}
+
+h1{
+	color:rgba(250,235,215, .5);
+	border: 5px dashed black;
+
+}
+li{
+	border: 2px solid blue;
+	color: purple;
+}
+#special {
+	color:white;
+}
+#dankman {
+	color:black  ;
+}
+.twothree{
+	text-decoration: line-through;
+}
