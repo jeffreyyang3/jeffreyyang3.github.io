@@ -5,7 +5,7 @@ arry = ["asdf", 42, true];
   
 }*/
 
-alert("get ready");
+alert("...Ready for It?");
 var h1 = document.querySelector("h1");
 var body = document.querySelector("body");
 body.style.background = "red"
