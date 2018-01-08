@@ -17,8 +17,8 @@ var body = document.body;
 function dank(){
 	 i = prompt("enter a number 2 add 2");
   	 document.getElementById("jstest").innerHTML = "RESULT: " + (Number(i) + 2);
-  	 document.body.style.background = "red";
-	 //h1.style.color = "pink";
+  	 document.body.style.background = "pink";
+	 
 }
 function change(){
 	h1.style.color = "pink";
