@@ -8,6 +8,10 @@ var xvelocity = Math.random() * 6;
 var yvelocity = Math.random() * 6;
 var c = canvas.getContext('2d');
 var dankman = new Ball(200,200);
+var bonkman = new Ball(300,300);
+var donkman = new Ball(100,100);
+var bingman = new Ball(250,250);
+var arry = [dankman, bonkman, donkman, bingman];
 c.fillStyle = "white";
 function Ball(x,y){
 	this.x = x;
@@ -26,27 +30,28 @@ function animate(){
 	c.clearRect(0,0,canvas.width,canvas.height);
 	requestAnimationFrame(animate);
 	c.beginPath();
+	for(i = 0; i < arry.length; i++){
+		c.arc(arry[i].x, arry[i].y, arry[i].radius, arry[i].start, arry[i].end, false);
+		c.fill();
+
+		if(arry[i].x + 30 >= 350){
+			arry[i].xvelocity *= -1;
+		}
+		if(arry[i].x <= 30){
+			arry[i].xvelocity *= -1;
+
+		}
+		if(arry[i].y + 30 >= 350) {
+			arry[i].yvelocity *= -1;
+		}
+		if(arry[i].y <= 30){
+			arry[i].yvelocity *= -1;
+
+		}
+		arry[i].x += arry[i].xvelocity;
+		arry[i].y += arry[i].yvelocity;
+	}
 	
-	c.arc(dankman.x, dankman.y, dankman.radius, dankman.start, dankman.end, false);
-	c.fill();
-
-if(dankman.x + 30 >= 350){
-	dankman.xvelocity *= -1;
-}
-if(dankman.x <= 30){
-	dankman.xvelocity *= -1;
-
-}
-if(dankman.y + 30 >= 350) {
-	dankman.yvelocity *= -1;
-}
-if(dankman.y <= 30){
-	dankman.yvelocity *= -1;
-
-}
-console.log(x);
-dankman.x += dankman.xvelocity;
-dankman.y += dankman.yvelocity;
 
 }
 
