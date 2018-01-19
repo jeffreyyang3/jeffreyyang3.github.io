@@ -1,4 +1,5 @@
-
+var h1 = document.querySelector("h1");
+var body = document.body;
 arry = ["asdf", 42, true];
 /*for(i = 0; i < arry.length; i++){
   console.log(arry[i]);
@@ -6,8 +7,7 @@ arry = ["asdf", 42, true];
 }*/
 
 alert("...Ready for It?");
-var h1 = document.querySelector("h1");
-var body = document.body;
+
 
 
 
