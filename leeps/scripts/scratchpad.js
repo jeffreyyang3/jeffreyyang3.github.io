@@ -9,6 +9,7 @@ var rand = [];
 var cumulative = 0;
 var show = false;
 var stochastic;
+var number;
 
 
 
@@ -25,19 +26,23 @@ $rangeslider
 $amount.on('input', function() {
   $rangeslider.val(this.value).change();
 });
+function add(){
+	where(document.getElementById("input").value);
+}
 
 
-function where(){	
-	var number = 0;
+function where(number1){	
+
 	
-	while(number != null){
-		var number = prompt("Enter a number between 0 and 1");
+	
+	
+		//var number = prompt("Enter a number between 0 and 1");
 		stochastic = Math.random();
 		
 		
-		if(number != null){
-			var profit = (1-((Number(number) - stochastic) * (Number(number) - stochastic)))
-			user.push(number);
+		if(number1 != null){
+			var profit = (1-((Number(number1) - stochastic) * (Number(number1) - stochastic)))
+			user.push(number1);
 			rand.push(stochastic);
 			profitarry.push(profit);
 			cumulative += profit;
@@ -55,15 +60,13 @@ function where(){
 
 		}
 
-	}
+	
 
 }
 function toggle(){
 	show = !show;
 	if(show){
-
 			document.getElementById("randnum").innerHTML = "Stochastic Value: " + stochastic;
-
 	}
 
 }
