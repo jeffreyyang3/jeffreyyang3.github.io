@@ -2,10 +2,7 @@ var canvas = document.querySelector("canvas");
 console.log(canvas);
 canvas.width = 350;
 canvas.height = 350;
-var x = 200
-var y = 200
-var xvelocity = Math.random() * 6;
-var yvelocity = Math.random() * 6;
+
 var c = canvas.getContext('2d');
 var dankman = new Ball(200,200);
 var bonkman = new Ball(300,300);
@@ -13,6 +10,7 @@ var donkman = new Ball(100,100);
 var bingman = new Ball(250,250);
 var arry = [dankman, bonkman, donkman, bingman];
 c.fillStyle = "white";
+
 function Ball(x,y){
 	this.x = x;
 	this.y = y;
@@ -24,6 +22,12 @@ function Ball(x,y){
 	this.ccw = false;
 }
 
+$("#banvas").click(function(event){
+	//mouse
+	arry.push(new Ball(event.clientX,event.clientY - 210));
+	console.log(event.clientX, event.clientY);
+})
+
 
 
 function animate(){
@@ -33,6 +37,7 @@ function animate(){
 	for(i = 0; i < arry.length; i++){
 		c.arc(arry[i].x, arry[i].y, arry[i].radius, arry[i].start, arry[i].end, false);
 		c.fill();
+		c.closePath();
 
 		if(arry[i].x + 30 >= 350){
 			arry[i].xvelocity *= -1;
