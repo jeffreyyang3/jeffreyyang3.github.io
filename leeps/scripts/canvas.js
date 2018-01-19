@@ -4,12 +4,11 @@ canvas.width = 350;
 canvas.height = 350;
 
 var c = canvas.getContext('2d');
-var dankman = new Ball(200,200);
-var bonkman = new Ball(300,300);
-var donkman = new Ball(100,100);
-var bingman = new Ball(250,250);
-var arry = [dankman, bonkman, donkman, bingman];
+
+var arry = [];
+var trail = [];
 c.fillStyle = "white";
+
 
 function Ball(x,y){
 	this.x = x;
@@ -19,7 +18,10 @@ function Ball(x,y){
 	this.radius = 30;
 	this.start = 0;
 	this.end = 2 * Math.PI;
-	this.ccw = false;
+	this.r = Math.round(255 * Math.random());
+	this.g = Math.round(255 * Math.random());
+	this.b = Math.round(255 * Math.random());
+	this.alpha = 1;
 }
 
 $("#banvas").click(function(event){
@@ -36,8 +38,10 @@ function animate(){
 	c.beginPath();
 	for(i = 0; i < arry.length; i++){
 		c.arc(arry[i].x, arry[i].y, arry[i].radius, arry[i].start, arry[i].end, false);
-		c.fill();
+		
 		c.closePath();
+		c.fill();
+		
 
 		if(arry[i].x + 30 >= 350){
 			arry[i].xvelocity *= -1;
@@ -55,9 +59,14 @@ function animate(){
 		}
 		arry[i].x += arry[i].xvelocity;
 		arry[i].y += arry[i].yvelocity;
+
 	}
+
 	
 
+}
+function resetcanvas(){
+	arry = [];
 }
 
 

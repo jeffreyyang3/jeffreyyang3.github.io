@@ -2,6 +2,7 @@ var canvas = document.querySelector("canvas");
 console.log(canvas);
 canvas.width = 350;
 canvas.height = 350;
+
 var x = 200
 var y = 200
 var xvelocity = 20;
@@ -10,7 +11,6 @@ var c = canvas.getContext('2d');
 c.fillStyle = "white";
 
 c.fillRect(50,150, 60,60);
-//line
 c.beginPath();
 c.moveTo(200,200);
 c.lineTo(300,100);
@@ -47,6 +47,4 @@ y += (-0.5 + Math.random()) * yvelocity;
 
 
 }
-
-
 animate();
