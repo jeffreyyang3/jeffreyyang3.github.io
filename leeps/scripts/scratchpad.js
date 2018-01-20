@@ -7,6 +7,7 @@ var user = [];
 var profitarry = [];
 var rand = [];
 var time = [];
+var cumul = [];
 var timen = 0;
 var cumulative = 0;
 var show = false;
@@ -50,6 +51,43 @@ var chart1 = new Chart(ctx1, {
 		}
 	}
 });
+var ctx2 = document.getElementById('chart2');
+var chart2 = new Chart(ctx2, {
+	type: 'line',
+	data: {
+		labels: [],
+		datasets: [{
+			label: 'Current Profit',
+			borderColor: 'rgb(255, 99, 132)',
+			data: profitarry
+		}],
+	},
+	options: {
+		responsive: false, // responds to your browser window size
+		layout: {
+			display: 'inline-block'
+		}
+	}
+});
+var ctx3 = document.getElementById('chart3');
+var chart3 = new Chart(ctx3, {
+	type: 'line',
+	data: {
+		labels: [],
+		datasets: [{
+			label: 'Cumulative Profit Over Time',
+			borderColor: 'rgb(255, 99, 132)',
+			data: cumul
+		}],
+	},
+	options: {
+		responsive: false, // responds to your browser window size
+		layout: {
+			display: 'inline-block'
+		}
+	}
+});
+
 
 
 
@@ -76,13 +114,20 @@ function where(number1){
 			chart.data.labels.push(user.length);
 			chart.update();
 			chart1.data.datasets[0].data = rand;
-			chart1.data.labels.push(rand.length);
+			chart1.data.labels.push(user.length);
 			chart1.update();
+			chart2.data.datasets[0].data = profitarry;
+			chart2.data.labels.push(user.length);
+			chart2.update();
+			chart3.data.datasets[0].data = cumul;
+			chart3.data.labels.push(user.length);
+			chart3.update();
 			rand.push(stochastic);
 			profitarry.push(profit);
 			time.push(timen);
 			timen++;
 			cumulative += profit;
+			cumul.push(cumulative);
 			document.getElementById("profit").innerHTML = "Current Profit: " + profit.toFixed(3);
 			document.getElementById("cumulative").innerHTML = " Cumulative Profit " + cumulative.toFixed(3);
 			if(show){
