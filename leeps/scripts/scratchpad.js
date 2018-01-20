@@ -6,6 +6,8 @@ var $amount = $('#js-amount-input');
 var user = [];
 var profitarry = [];
 var rand = [];
+var time = [];
+var timen = 0;
 var cumulative = 0;
 var show = false;
 var stochastic;
@@ -45,8 +47,10 @@ function where(number1){
 			user.push(number1);
 			rand.push(stochastic);
 			profitarry.push(profit);
+			time.push(timen);
+			timen++;
 			cumulative += profit;
-			document.getElementById("profit").innerHTML = "Profit: " + profit;
+			document.getElementById("profit").innerHTML = "Current Profit: " + profit;
 			document.getElementById("cumulative").innerHTML = " Cumulative Profit " + cumulative;
 			if(show){
 
@@ -54,7 +58,9 @@ function where(number1){
 
 			}
 			else{
+				console.log("super debug");
 				document.getElementById("randnum").innerHTML = "";
+				
 			}
 
 
@@ -66,7 +72,11 @@ function where(number1){
 function toggle(){
 	show = !show;
 	if(show){
-			document.getElementById("randnum").innerHTML = "Stochastic Value: " + stochastic;
+		document.getElementById("randnum").innerHTML = "Stochastic Value: " + stochastic;
+	}
+	else{
+		document.getElementById("randnum").innerHTML = "";
+
 	}
 
 }

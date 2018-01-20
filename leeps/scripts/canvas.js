@@ -26,7 +26,7 @@ function Ball(x,y){
 
 $("#banvas").click(function(event){
 	//mouse
-	arry.push(new Ball(event.clientX,event.clientY - 210));
+	arry.push(new Ball(event.clientX,event.clientY - 230));
 	console.log(event.clientX, event.clientY);
 })
 
