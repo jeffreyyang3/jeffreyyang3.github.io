@@ -16,25 +16,52 @@ var number;
 
 
 
-
-$rangeslider
-  .rangeslider({
-    polyfill: false
-  })
-  .on('input', function() {
-    $amount[0].value = this.value;
-  });
-
-$amount.on('input', function() {
-  $rangeslider.val(this.value).change();
+var ctx = document.getElementById('chart');
+var chart = new Chart(ctx, {
+	type: 'line',
+	data: {
+		labels: [],
+		datasets: [{
+			label: 'Time Series of User Values',
+			borderColor: 'rgb(255, 99, 132)',
+			data: user
+		}],
+	},
+	options: {
+		responsive: false, // responds to your browser window size
+	}
 });
+
+var ctx1 = document.getElementById('chart1');
+var chart1 = new Chart(ctx1, {
+	type: 'line',
+	data: {
+		labels: [],
+		datasets: [{
+			label: 'Time Series of Stochastic Values',
+			borderColor: 'rgb(255, 99, 132)',
+			data: rand
+		}],
+	},
+	options: {
+		responsive: false, // responds to your browser window size
+		layout: {
+			display: 'inline-block'
+		}
+	}
+});
+
+
+
+
 function add(){
-	where(document.getElementById("input").value);
+	var value = document.getElementById('input').value;
+	where(value);
 }
 
 
 function where(number1){	
-
+		console.log("where	", number1);
 	
 	
 	
@@ -45,20 +72,25 @@ function where(number1){
 		if(number1 != null){
 			var profit = (1-((Number(number1) - stochastic) * (Number(number1) - stochastic)))
 			user.push(number1);
+			chart.data.datasets[0].data = user;
+			chart.data.labels.push(user.length);
+			chart.update();
+			chart1.data.datasets[0].data = rand;
+			chart1.data.labels.push(rand.length);
+			chart1.update();
 			rand.push(stochastic);
 			profitarry.push(profit);
 			time.push(timen);
 			timen++;
 			cumulative += profit;
-			document.getElementById("profit").innerHTML = "Current Profit: " + profit;
-			document.getElementById("cumulative").innerHTML = " Cumulative Profit " + cumulative;
+			document.getElementById("profit").innerHTML = "Current Profit: " + profit.toFixed(3);
+			document.getElementById("cumulative").innerHTML = " Cumulative Profit " + cumulative.toFixed(3);
 			if(show){
 
 			document.getElementById("randnum").innerHTML = "Stochastic Value: " + stochastic;
 
 			}
 			else{
-				console.log("super debug");
 				document.getElementById("randnum").innerHTML = "";
 				
 			}

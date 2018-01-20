@@ -1,5 +1,4 @@
-var canvas = document.querySelector("canvas");
-console.log(canvas);
+var canvas = document.getElementById("banvas");
 canvas.width = 350;
 canvas.height = 350;
 

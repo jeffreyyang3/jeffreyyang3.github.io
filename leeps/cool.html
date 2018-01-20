@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html>
 <head>
+
 	 <meta charset="UTF-8">
 	<link rel = "stylesheet" href = "rangeslider.css">
 	<link rel = "stylesheet" href = "funstyle.css">
 
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
-	<script src="scripts/jquery-3.2.1.js"></script>
-	<script src="scripts/rangeslider.min.js"></script>
-	<script src="scripts/scratchpad.js"></script>
+	<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.bundle.js"></script> -->
+	<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.bundle.min.js"></script> -->
+	<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.js"></script> -->
+
 
 
 
@@ -16,6 +17,12 @@
 
 </head>
 <body>
+	<canvas id="chart" width="400" height="200"></canvas>
+	<canvas id="chart1" width="400" height="200"> </canvas>
+	<canvas id="chart2" width="400" height="200"> </canvas>
+	<canvas id="chart3" width="400" height="200"> </canvas>
+
+
 	<title>LEEPS Programming Problems</title>
 
 	<h1> Problem 1 </h1>
@@ -37,12 +44,16 @@
 	<h2 id = "demo"></h2>
 	<h1> problem 2</h1>
 	<canvas id = "banvas"></canvas>
-	<script src="scripts/canvas.js"></script>
 	<div>
     <h3> click somewhere on the canvas to add a particle there!!</h3>
 	<button type = "button" onclick = "resetcanvas()"> Reset </button>
 	</div>
 
 
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
+	<script src="scripts/jquery-3.2.1.js"></script>
+	<script src="scripts/rangeslider.min.js"></script>
+	<script src="scripts/canvas.js"></script>
+	<script src="scripts/scratchpad.js"></script>
 </body>
 </html>
