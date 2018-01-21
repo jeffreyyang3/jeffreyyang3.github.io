@@ -94,7 +94,12 @@ var chart3 = new Chart(ctx3, {
 
 function add(){
 	var value = document.getElementById('input').value;
+	if(Math.abs(value) > 1 || value < 0 || isNaN(value)){
+		alert("Input a number between 0 and 1");
+	}
+	else{
 	where(value);
+	}
 }
 
 
