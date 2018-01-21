@@ -24,7 +24,8 @@ var chart = new Chart(ctx, {
 		labels: [],
 		datasets: [{
 			label: 'Time Series of User Values',
-			borderColor: 'rgb(255, 99, 132)',
+			borderColor: '#29B6F6',
+			backgroundColor: 'rgba(41, 182, 246, 0.25)',
 			data: user
 		}],
 	},
@@ -40,7 +41,8 @@ var chart1 = new Chart(ctx1, {
 		labels: [],
 		datasets: [{
 			label: 'Time Series of Stochastic Values',
-			borderColor: 'rgb(255, 99, 132)',
+			borderColor: '#29B6F6',
+			backgroundColor: 'rgba(41, 182, 246, 0.25)',
 			data: rand
 		}],
 	},
@@ -58,7 +60,8 @@ var chart2 = new Chart(ctx2, {
 		labels: [],
 		datasets: [{
 			label: 'Current Profit',
-			borderColor: 'rgb(255, 99, 132)',
+			borderColor: '#29B6F6',
+			backgroundColor: 'rgba(41, 182, 246, 0.25)',
 			data: profitarry
 		}],
 	},
@@ -76,7 +79,8 @@ var chart3 = new Chart(ctx3, {
 		labels: [],
 		datasets: [{
 			label: 'Cumulative Profit Over Time',
-			borderColor: 'rgb(255, 99, 132)',
+			borderColor: '#29B6F6',
+			backgroundColor: 'rgba(41, 182, 246, 0.25)',
 			data: cumul
 		}],
 	},
