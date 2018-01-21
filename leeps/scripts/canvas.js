@@ -21,11 +21,13 @@ function Ball(x,y){
 	this.g = Math.round(255 * Math.random());
 	this.b = Math.round(255 * Math.random());
 	this.alpha = 1;
+	this.trailx = [];
+	this.traily = [];
 }
 
 $("#banvas").click(function(event){
 	//mouse
-	arry.push(new Ball(event.clientX,event.clientY - 230));
+	arry.push(new Ball(event.offsetX,event.offsetY));
 	console.log(event.clientX, event.clientY);
 })
 
@@ -35,11 +37,15 @@ function animate(){
 	c.clearRect(0,0,canvas.width,canvas.height);
 	requestAnimationFrame(animate);
 	c.beginPath();
+
 	for(i = 0; i < arry.length; i++){
 		c.arc(arry[i].x, arry[i].y, arry[i].radius, arry[i].start, arry[i].end, false);
+
+	
 		
 		c.closePath();
 		c.fill();
+
 		
 
 		if(arry[i].x + 30 >= 350){
@@ -56,16 +62,39 @@ function animate(){
 			arry[i].yvelocity *= -1;
 
 		}
+
+		
 		arry[i].x += arry[i].xvelocity;
 		arry[i].y += arry[i].yvelocity;
+		/*for(i = 0; i < arry.length; i++){
+			for(j = i + 1; j < arry.length; j++){
+				if(arry[i].y + 30 == arry[j].y){
+					arry[i].yvelocity *= -1;
+				}
+				if(arry[i].x + 30 == arry[j].x){
+					arry[i].xvelocity *= -1;
+				}
+
+			}
+		}
+		*/
+		
+
 
 	}
+
+
+
+	
+	
+	
 
 	
 
 }
 function resetcanvas(){
 	arry = [];
+	trail = [];
 }
 
 

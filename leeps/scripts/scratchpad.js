@@ -65,7 +65,7 @@ var chart2 = new Chart(ctx2, {
 	options: {
 		responsive: false, // responds to your browser window size
 		layout: {
-			display: 'inline-block'
+			//display: 'inline-block'
 		}
 	}
 });
@@ -136,7 +136,7 @@ function where(number1){
 
 			}
 			else{
-				document.getElementById("randnum").innerHTML = "";
+					document.getElementById("randnum").innerHTML = "";
 				
 			}
 
