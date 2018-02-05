@@ -6,7 +6,7 @@ arry = ["asdf", 42, true];
   
 }*/
 
-alert("...Ready for It?");
+//alert("...Ready for It?");
 
 
 

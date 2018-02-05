@@ -1,8 +1,7 @@
 
 
 var body = document.body;
-var $rangeslider = $('#js-amount-range');
-var $amount = $('#js-amount-input');
+
 var user = [];
 var profitarry = [];
 var rand = [];
