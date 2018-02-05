@@ -17,7 +17,8 @@ arry = ["asdf", 42, true];
 function dank(){
 	 i = prompt("enter a number 2 add 2");
   	 document.getElementById("jstest").innerHTML = "RESULT: " + (Number(i) + 2);
-  	 document.body.style.background = "pink";
+  	 document.body.style.background = "orange";
+  	 
 	 
 }
 function change(){

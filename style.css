@@ -20,18 +20,22 @@ input {
 }
 h1{
 	color: white;
-	padding-left: 20px;
+	padding-top: 30px;
+
 	font-size: 420%;
 
 	text-align: left;
+	padding-left: 45px;
 	font-weight: bold;
+
+
 	
 
 }
 
 h2,h3,h4,h5{
 	color: white;
-	padding-left: 20px;
+	padding-left: 45px;
 	font-weight: 500;
 	text-align: left;
 }
@@ -53,7 +57,8 @@ input {
 button {
 
 	position: relative;
-	margin: 10px;
+	margin-left: 45px;
+	margin-top: 20px;
 	padding: 10px;
 	background-color: #29B6F6;
 	color: #fff;
@@ -101,6 +106,59 @@ canvas {
 	position: relative;
 	left: 50%;
 	transform: translateX(-50%);
+}
+* {
+  margin: 0;
+  padding: 0;
+}
+ 
+nav {
+
+  margin: 32px;
+}
+ 
+ul {
+
+
+
+  overflow: auto;
+  list-style-type: none;
+
+}
+ 
+li {
+
+  height: 25px;
+  float: left;
+  margin-left: 0px;
+  border-right: 1px solid #aaa;
+  padding:15px;
+}
+ 
+li:last-child {
+  border-right: none;
+}
+ 
+li a {
+  text-decoration: none;
+  color: white;
+  font: 25px/1 Helvetica, Verdana, sans-serif;
+
+ 
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  -ms-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+}
+ 
+li a:hover {
+  color: #666;
+}
+ 
+li.active a {
+  font-weight: bold;
+  color: #333;
 }
 
 
