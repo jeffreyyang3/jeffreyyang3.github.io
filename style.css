@@ -2,10 +2,10 @@ body,
 p {
   margin: 0;
   padding: 0;
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Helvetica', sans-serif;
   font-size: 14px;
   font-weight: 400;
-  background-color: #fafafa;
+  background-color: black;
 }
 
 button,
@@ -14,11 +14,12 @@ input {
 	border: none;
 	padding: 0;
 	margin: 0;
-	font-family: 'Roboto', sans-serif;
+	font-family: 'Helvetica', sans-serif;
 	font-size: 14px;
 	font-weight: 400;
 }
 h1{
+	color: white;
 	padding-left: 20px;
 	font-size: 420%;
 
@@ -29,6 +30,7 @@ h1{
 }
 
 h2,h3,h4,h5{
+	color: white;
 	padding-left: 20px;
 	font-weight: 500;
 	text-align: left;
