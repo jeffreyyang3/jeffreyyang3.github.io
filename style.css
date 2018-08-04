@@ -1,11 +1,10 @@
-body,
-p {
+body {
   margin: 0;
   padding: 0;
   font-family: 'Helvetica', sans-serif;
   font-size: 14px;
   font-weight: 400;
-  background-color: black;
+  background-color: maroon;
 }
 
 button,
@@ -53,6 +52,7 @@ input {
 	border: 1px solid #AAA;
 	border-radius: 5px;
 }
+
 
 button {
 
@@ -117,7 +117,7 @@ nav {
   margin: 32px;
 }
  
-ul {
+.myMenu {
 
 
 
@@ -160,6 +160,23 @@ li.active a {
   font-weight: bold;
   color: #333;
 }
+.demo{
+	width: 100px;
+	height:100px;
+	background-color: gray;
+	display:inline-block
+}
+.red {
+	background-color: red;
+}
+.green {
+	background-color: green;
+}
+.blue{
+	background-color: blue;
+}
+
+
 
 
 
