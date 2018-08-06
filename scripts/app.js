@@ -9,7 +9,10 @@ function arrayStep(arry,i){
     arry[j + 1] = temp;
     
 }
-
+function Shuffle(o) {
+    for (var j, x, i = o.length; i; j = parseInt(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
+    return o;
+};
 
 function merge(left, right) {
     var result = [];
@@ -29,19 +32,21 @@ function merge(left, right) {
 }
 var vm = new Vue({
     el: '#exercise',
+    
     data: {
         number: 0,
         array: [],   
     },
+    
 
     methods:{
         insertionSort: function(){
             setTimeout(function timeoutSort(array, i) {
                 if (i < array.length) {
                     arrayStep(array, i);
-                    setTimeout(timeoutSort, 10, array, i + 1);
+                    setTimeout(timeoutSort, 25, array, i + 1);
                 }
-            }, 10, this.array, 0);
+            }, 25, this.array, 0);
 
             return this.array;
 
@@ -68,23 +73,26 @@ var vm = new Vue({
             x = parseInt(numberStr)
             a = []
             
-            for (i = 0; i < x + 1; i++) {
-                a.push(Math.random() * 300);
+            for (i = 0; i < x + 1; i+= 0.15) {
+                a.push(i + 1);
             }
             
 
-            
+            Shuffle(a)
             this.array = a
         },
         
         divClasses: function(h) {
             return {
-                width: '5px',
+                width: '3px',
                 height: h + 'px',
-                display: 'inline-block',
+                display: 'block',
                 backgroundColor: this.randomColor(),
+                //opacity: .75,
                 float: 'left',
-                //opacity: .9
+                marginTop: '0px'
+            
+
             };
         },
 
@@ -100,29 +108,11 @@ var vm = new Vue({
 
 
     },
-
-});
-
-
-/*
-
-        
-new Vue({
-    el: '#exercise',
-    data: {
-        isShown: true,
-        array: ['Max', 'Anna', 'Chris', 'Manu'],
-        myObject: {
-            title: 'Lord of the Rings',
-            author: 'J.R.R. Tolkiens',
-            books: '3'
-        },
-        testData: {
-            name: 'TESTOBJECT',
-            id: 10,
-            data: [1.67, 1.33, 0.98, 2.21]
-        }
+    mounted(){
+        this.bigArray(16);
+        this.insertionSort();
     }
+
 });
 
-*/
+

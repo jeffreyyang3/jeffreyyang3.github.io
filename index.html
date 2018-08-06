@@ -10,8 +10,16 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Helvetica">
 </head>
 <body>
+<h1 id="name"> Jeffrey Yang</h1>
 
-<h1> Jeffrey Yang</h1>
+<div id="exercise">
+	
+	<ul v-for="bar in array" v-bind:style="{ margin: '45px', marginTop: '-30px'}">
+		<div v-bind:style="divClasses(bar * 3.5)"> </div>
+	</ul>
+</div>
+<br><br><br>
+
 
 <nav>
   <ul class="myMenu">
@@ -22,28 +30,11 @@
 </nav>
 
 
-<h3> Second Year Computer Science Student at UC Santa Cruz</h3>
-<br> <br> <br>
-<h3> cool decorations below try to keep it to around 260 or less</h3>
-<br> <br>
-<br>
-
-
-<div id="exercise">
-	<h1 class="techniColor">LIFE IN TECHNICOLOR</h1>
-	<input v-model="number" v-bind:style="{ margin: '45px', }">
-	<button v-on:click="bigArray(number)">create with that many elements</button>
-
-
-	<button v-on:click="insertionSort()">insertion sort (seizure warning)</button>
 
 
 
 
-	<ul v-for="bar in array" v-bind:style="{ margin: '45px'}">
-		<div v-bind:style="divClasses(bar)"> </div>
-	</ul>
-</div>
+
 <script src="scripts/scratchpad.js"></script>
 <script src="scripts/vue.js"></script>
 <script src="scripts/app.js"></script>
