@@ -184,6 +184,12 @@ li.active a {
 .blue{
 	background-color: blue;
 }
+canvas{
+	margin: 1px;
+	position: absolute; 
+	z-index: -1; 
+
+}
 
 
 

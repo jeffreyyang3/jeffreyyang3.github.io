@@ -30,6 +30,25 @@ function merge(left, right) {
     
     return result;
 }
+
+var vueC = {
+    data: function(){
+        return {
+            status: "xxx"
+        }
+    },
+    template: '<p> cool: {{ status }} </p>'
+}
+
+
+new Vue({
+    el: '#xx',
+    components: {
+        'my-cmp': vueC
+    }
+})
+
+
 var vm = new Vue({
     el: '#exercise',
     
