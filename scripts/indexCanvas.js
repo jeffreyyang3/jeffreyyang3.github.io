@@ -11,9 +11,9 @@ var balls = []
 var gravity = -0.35
 var bounce = .8
 
-document.getElementById('indexCanvas').addEventListener('click', function (event) {
+document.getElementById('body').addEventListener('mousemove', function (event) {
     console.log("xxx")
-    balls.push(new Ball(event.offsetX, event.offsetY, 10, randomColor()))
+    balls.push(new Ball(event.offsetX, event.offsetY, 5, randomColor()))
 });
 
 
@@ -37,23 +37,22 @@ function animate(){
     
     requestAnimationFrame(animate);
     ctxt.clearRect(0, 0, canvas.width, canvas.height);
-    for (let i = 0; i < balls.length; i++){
-        if(balls[i].bounceCount == 4){
-            balls.splice(i)
-        }
-    }
+
 
     
     
     for(let i = 0; i < balls.length; i++){
         
+        
         drawCircle(balls[i], ctxt)
         if (
-            balls[i].x + balls[i].radius > canvas.width ||
+            (balls[i].x + balls[i].radius > canvas.width ||
             balls[i].x - balls[i].radius < 0 ||
-            balls[i].y + balls[i].radius > canvas.height// ||
+            balls[i].y + balls[i].radius > canvas.height// ||)
             
             //ball.y - ball.radius  < 0
+            ) 
+            && balls[i].bounceCount < 1
         ) {
             balls[i].bounceCount++
 
@@ -70,7 +69,12 @@ function animate(){
             balls[i].y -= balls[i].radius
             gravity = -.35
         }
+        else if(balls[i].bounceCount > 1){
+            balls.splice(i)
+
+        }
         else{ 
+            balls[i].x += balls[i].vx
 
             balls[i].y -= balls[i].vy
             balls[i].vy += gravity
@@ -80,7 +84,8 @@ function animate(){
     
 }
 function Ball(x,y,radius, color){
-    this.vy = 2
+    this.vy = 3
+    this.vx = Math.random() * 10 - 5
     this.x = x
     this.y = y
     this.radius = radius
