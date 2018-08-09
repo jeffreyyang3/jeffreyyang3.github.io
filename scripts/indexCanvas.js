@@ -12,7 +12,11 @@ var gravity = -0.35
 var bounce = .8
 
 document.getElementById('body').addEventListener('mousemove', function (event) {
-    console.log("xxx")
+
+    balls.push(new Ball(event.offsetX, event.offsetY, 5, randomColor()))
+});
+document.getElementById('body').addEventListener('click', function (event) {
+
     balls.push(new Ball(event.offsetX, event.offsetY, 5, randomColor()))
 });
 
@@ -32,7 +36,8 @@ function randomColor() {
     return color;
 }
 function animate(){
-    console.log("animate")
+    console.log(balls.length)
+  
     
     
     requestAnimationFrame(animate);
@@ -69,16 +74,16 @@ function animate(){
             balls[i].y -= balls[i].radius
             gravity = -.35
         }
-        else if(balls[i].bounceCount > 1){
-            balls.splice(i)
+        
 
-        }
         else{ 
+            
             balls[i].x += balls[i].vx
 
             balls[i].y -= balls[i].vy
             balls[i].vy += gravity
         }
+        
     }
     
     
@@ -96,10 +101,14 @@ function Ball(x,y,radius, color){
 function drawCircle(ball,ctxt) {
     
     ctxt.fillStyle = ball.color
+
     ctxt.beginPath();
     ctxt.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2, true)
     ctxt.fill()
-    
+
     ctxt.closePath()
+    
+    
+    
     
 }

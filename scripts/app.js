@@ -34,7 +34,7 @@ function merge(left, right) {
 var vueC = {
     data: function(){
         return {
-            status: "xxx"
+            status: "test"
         }
     },
     template: '<p> cool: {{ status }} </p>'
