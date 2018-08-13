@@ -10,14 +10,15 @@ var vx = 0;
 var balls = []
 var gravity = -0.35
 var bounce = .8
+window.onload = function (e) {
+    document.getElementById('body').addEventListener('mousemove', function (event) {
 
-document.getElementById('body').addEventListener('mousemove', function (event) {
+        balls.push(new Ball(event.offsetX, event.offsetY, 5, randomColor()))
+    });
+}
 
-    balls.push(new Ball(event.offsetX, event.offsetY, 5, randomColor()))
-});
-window.addEventListener("beforeunload", function () {
-    document.body.classList.add("animate-out");
-});
+
+
 
 
 

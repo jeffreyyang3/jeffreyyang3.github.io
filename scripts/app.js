@@ -30,9 +30,9 @@ var vm = new Vue({
             setTimeout(function timeoutSort(array, i) {
                 if (i < array.length) {
                     arrayStep(array, i);
-                    setTimeout(timeoutSort, 25, array, i + 1);
+                    setTimeout(timeoutSort, 10, array, i + 1);
                 }
-            }, 25, this.array, 0);
+            }, 10, this.array, 0);
 
             return this.array;
 
@@ -54,7 +54,7 @@ var vm = new Vue({
         divClasses: function(h) {
             return {
                 border: '1px solid black',
-                width: '3.55px',
+                width: '2.5px',
                 height: h + 'px',
                 display: 'block',
                 backgroundColor: colorArry[Math.floor(Math.random() * colorArry.length)],
@@ -79,7 +79,7 @@ var vm = new Vue({
 
     },
     mounted(){
-        this.bigArray(15);
+        this.bigArray(19);
         this.insertionSort();
     }
 
