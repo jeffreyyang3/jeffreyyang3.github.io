@@ -4,8 +4,8 @@ body {
   font-family: 'Roboto', sans-serif;
   font-size: 14px;
   font-weight: 400;
-	background-color: #fafafa;
-	transition:all 4s ease;
+  background-color: #fafafa;
+	
 	
 }
 
@@ -56,7 +56,7 @@ h2,h3,h4,h5{
 
 
 .aboutDesc{
-	margin-left: 80px;
+	margin-left: 45px;
 	margin-top: 27px;
 	margin-right: 35px;
 
@@ -209,24 +209,6 @@ canvas{
 #about{
 	clear:both;
 }
-.animate-in {
-    -webkit-animation: fadeIn 1s ease-in;
-    animation: fadeIn 1s ease-in;
-}
-.animate-out {
-    -webkit-transition: opacity 3s;
-    transition: opacity 3s;
-    opacity: 0;
-}
-@-webkit-keyframes fadeIn {
-    from { opacity: .7; }
-    to { opacity: 1; }
-}
-@keyframes fadeIn {
-    from { opacity: .7; }
-    to { opacity: 1; }
-}
-
 
 
 
