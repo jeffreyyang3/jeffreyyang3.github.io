@@ -54,7 +54,7 @@ var vm = new Vue({
         divClasses: function(h) {
             return {
                 border: '1px solid black',
-                width: '5px',
+                width: '3.55px',
                 height: h + 'px',
                 display: 'block',
                 backgroundColor: colorArry[Math.floor(Math.random() * colorArry.length)],
