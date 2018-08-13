@@ -6,6 +6,7 @@ p {
   font-size: 14px;
   font-weight: 400;
   background-color: #fafafa;
+  transition:all 2s ease;
 }
 
 button,
@@ -90,5 +91,68 @@ canvas {
 	left: 50%;
 	transform: translateX(-50%);
 }
+.nav{
 
 
+    list-style:none;
+    margin:0;
+    padding:0;
+		text-align:left;
+		background-color: #6200ea;
+		-webkit-box-shadow: 0 8px 6px -6px #999;
+    -moz-box-shadow: 0 8px 6px -6px #999;
+    box-shadow: 0 8px 6px -6px #999;
+}
+.nav li{
+	
+		display:inline;
+		margin-left: 45px;
+		padding:0
+}
+.nav a{
+    display:inline-block;
+    padding:10px;
+}
+li:last-child {
+  border-right: none;
+}
+ 
+li a {
+  text-decoration: none;
+  color: white;
+  font: 30px/1 Verdana, sans-serif;
+
+ 
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  -ms-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+}
+ 
+li a:hover {
+  color: #666;
+}
+ 
+li.active a {
+  font-weight: bold;
+  color: #333;
+}
+
+.animate-in {
+    -webkit-animation: fadeIn 1s ease-in;
+    animation: fadeIn 1s ease-in;
+}
+.animate-out {
+    -webkit-transition: opacity .5s;
+    transition: opacity .5s;
+    opacity: 0;
+}
+@-webkit-keyframes fadeIn {
+    from { opacity: .5; }
+    to { opacity: 1; }
+}
+@keyframes fadeIn {
+    from { opacity: .5; }
+    to { opacity: 1; }
+}

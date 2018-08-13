@@ -15,6 +15,9 @@ document.getElementById('body').addEventListener('mousemove', function (event) {
 
     balls.push(new Ball(event.offsetX, event.offsetY, 5, randomColor()))
 });
+window.addEventListener("beforeunload", function () {
+    document.body.classList.add("animate-out");
+});
 
 
 
