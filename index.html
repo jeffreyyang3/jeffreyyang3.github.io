@@ -11,24 +11,39 @@
 </head>
 <body id ="body">
   <canvas id="indexCanvas"></canvas>
-<h1 id="name"> Jeffrey Yang</h1>
+
+  <ul class="nav">
+    <li>
+      <a href="https://github.com/jeffreyyang3"> GitHub </a>
+    </li>
+    <li>
+      <a href="Resume.pdf"> Resume </a>
+    </li>
+    <li>
+      <a href="www.linkedin.com/in/jeffrey-yang-099872158"> LinkedIn </a>
+    </li>
+  
+  
+    <li>
+      <a href="leeps/index.html"> Projects </a>
+    </li>
+  </ul>
+
+  
+<h1 > Jeffrey Yang</h1>
+<h2 id="desc"> Computer Science Student at UC Santa Cruz</h2>
 
 <div id="exercise">
 	
+
 	<ul v-for="bar in array" v-bind:style="{ margin: '45px', marginTop: '-30px'}">
-		<div v-bind:style="divClasses(bar * 3.5)"> </div>
+		<div v-bind:style="divClasses(bar * 4.5)"> </div>
 	</ul>
 </div>
 <br><br><br>
 
 
-<nav>
-  <ul class="myMenu">
-    <li> <a href = "https://github.com/jeffreyyang3" > GitHub </a></li>
-    <li> <a href = "Resume.pdf" > Resume </a></li>
-     <li> <a href = "leeps/index.html" > Projects </a> </li>
-  </ul>
-</nav>
+
 
 
 
@@ -40,6 +55,8 @@
 <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
 <script src="scripts/app.js"></script>
 <script src="scripts/indexCanvas.js"></script>
+
+
 
 </body>
 </html>

@@ -13,40 +13,7 @@ function Shuffle(o) {
     for (var j, x, i = o.length; i; j = parseInt(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
     return o;
 };
-
-function merge(left, right) {
-    var result = [];
-    while (left.length && right.length) {
-        if (left[0] <= right[0]) {
-            result.push(left.shift());
-        } else {
-            result.push(right.shift());
-        }
-    }
-    while (left.length)
-        result.push(left.shift());
-    while (right.length)
-        result.push(right.shift());
-    
-    return result;
-}
-
-var vueC = {
-    data: function(){
-        return {
-            status: "test"
-        }
-    },
-    template: '<p> cool: {{ status }} </p>'
-}
-
-
-new Vue({
-    el: '#xx',
-    components: {
-        'my-cmp': vueC
-    }
-})
+colorArry = ['#d50000', '#c51162', '#aa00ff', '#6200ea', '#304ffe', '#2962ff', '#0091ea', '#00b8d4', '#00bfa5', '#00c853', '#64dd17', '#aeea00', '#ffd600', '#ffab00', '#ff6d00', '#dd2c00']
 
 
 var vm = new Vue({
@@ -70,24 +37,7 @@ var vm = new Vue({
             return this.array;
 
         },
-        mergeSort: function(){ //not operational
-            setTimeout(function timeoutSort(array){
-                if(array.length < 2){
-                    
-                    return this.array;
-                }
-                else{
-                    console.log("xxx")
-                    var middle = parseInt(array.length / 2);
-                    var left = array.slice(0, middle);
-                    var right = array.slice(middle, array.length);
-                    return merge(setTimeout(timeoutSort, 10, left), setTimeout(timeoutSort, 10, right));
-                }
-            }, 10, this.array);
 
-        },
-
-        
         bigArray: function (numberStr) {
             x = parseInt(numberStr)
             a = []
@@ -103,10 +53,10 @@ var vm = new Vue({
         
         divClasses: function(h) {
             return {
-                width: '3px',
+                width: '5.8px',
                 height: h + 'px',
                 display: 'block',
-                backgroundColor: this.randomColor(),
+                backgroundColor: colorArry[Math.floor(Math.random() * colorArry.length)],
                 //opacity: .75,
                 float: 'left',
                 marginTop: '0px'
@@ -128,7 +78,7 @@ var vm = new Vue({
 
     },
     mounted(){
-        this.bigArray(16);
+        this.bigArray(18);
         this.insertionSort();
     }
 

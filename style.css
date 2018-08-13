@@ -1,10 +1,11 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: 'Helvetica', sans-serif;
+  font-family: 'Roboto', sans-serif;
   font-size: 14px;
   font-weight: 400;
-  background-color: black;
+	background-color: #fafafa;
+	
 }
 
 
@@ -19,32 +20,37 @@ input {
 	font-weight: 400;
 }
 h1{
-	color: white;
+	color: black;
 	padding-top: 30px;
+	
 
-	font-size: 435%;
+	font-size: 540%;
 
 	text-align: left;
 	padding-left: 45px;
 	font-weight: bold;
+	margin-bottom: -5px
 }
-.techniColor{
-	font-family: "Comic Sans MS", serif;
-	  background: -moz-linear-gradient(45deg, rgba(255,0,0,1) 0%, rgba(255,255,0,1) 25%, rgba(5,193,255,1) 50%, rgba(255,255,0,1) 75%, rgba(255,0,0,1) 100%); /* ff3.6+ */
-    background: -webkit-gradient(linear, left bottom, right top, color-stop(0%, rgba(255,0,0,1)), color-stop(25%, rgba(255,255,0,1)), color-stop(50%, rgba(5,193,255,1)), color-stop(75%, rgba(255,255,0,1)), color-stop(100%, rgba(255,0,0,1))); /* safari4+,chrome */
-    background: -webkit-linear-gradient(45deg, rgba(255,0,0,1) 0%, rgba(255,255,0,1) 25%, rgba(5,193,255,1) 50%, rgba(255,255,0,1) 75%, rgba(255,0,0,1) 100%); /* safari5.1+,chrome10+ */
-    background: -o-linear-gradient(45deg, rgba(255,0,0,1) 0%, rgba(255,255,0,1) 25%, rgba(5,193,255,1) 50%, rgba(255,255,0,1) 75%, rgba(255,0,0,1) 100%); /* opera 11.10+ */
-    background: -ms-linear-gradient(45deg, rgba(255,0,0,1) 0%, rgba(255,255,0,1) 25%, rgba(5,193,255,1) 50%, rgba(255,255,0,1) 75%, rgba(255,0,0,1) 100%); /* ie10+ */
-    background: linear-gradient(45deg, rgba(255,0,0,1) 0%, rgba(255,255,0,1) 25%, rgba(5,193,255,1) 50%, rgba(255,255,0,1) 75%, rgba(255,0,0,1) 100%); /* w3c */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff0000', endColorstr='#ff0000',GradientType=1 ); /* ie6-9 */ 
 
-}
 
 h2,h3,h4,h5{
-	color: white;
+	color: black;
+	padding-top: 30px;
 	padding-left: 45px;
 	font-weight: 500;
+	font-weight: bold;
 	text-align: left;
+}
+#desc{
+	color: black;
+	margin-top: 0px;
+
+	font-size: 250%;
+
+	text-align: left;
+	padding-left: 45px;
+	font-weight: bold;
+
 }
 
 p {
@@ -120,28 +126,33 @@ canvas {
   padding: 0;
 }
  
-nav {
 
-  margin: 32px;
-}
  
-.myMenu {
-	margin-top: 40px;
+.nav{
+
+
+    list-style:none;
+    margin:0;
+    padding:0;
+		text-align:left;
+		background-color: #6200ea;
+		-webkit-box-shadow: 0 8px 6px -6px #999;
+    -moz-box-shadow: 0 8px 6px -6px #999;
+    box-shadow: 0 8px 6px -6px #999;
+}
+.nav li{
 	
-
-
-  overflow: auto;
-  list-style-type: none;
-
+		display:inline;
+		margin-left: 45px;
+		padding:0
 }
- 
+.nav a{
+    display:inline-block;
+    padding:10px;
+}
 li {
 
-  height: 25px;
-  float: left;
-  margin-left: 0px;
-  border-right: 1px solid #aaa;
-  padding:15px;
+  
 }
  
 li:last-child {
@@ -151,7 +162,7 @@ li:last-child {
 li a {
   text-decoration: none;
   color: white;
-  font: 25px/1 Helvetica, Verdana, sans-serif;
+  font: 30px/1 Verdana, sans-serif;
 
  
   -webkit-transition: all 0.5s ease;

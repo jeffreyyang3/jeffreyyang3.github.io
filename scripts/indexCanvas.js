@@ -15,10 +15,6 @@ document.getElementById('body').addEventListener('mousemove', function (event) {
 
     balls.push(new Ball(event.offsetX, event.offsetY, 5, randomColor()))
 });
-document.getElementById('body').addEventListener('click', function (event) {
-
-    balls.push(new Ball(event.offsetX, event.offsetY, 5, randomColor()))
-});
 
 
 
@@ -36,7 +32,8 @@ function randomColor() {
     return color;
 }
 function animate(){
-    console.log(balls.length)
+    
+    
   
     
     
@@ -47,29 +44,23 @@ function animate(){
     
     
     for(let i = 0; i < balls.length; i++){
+ 
         
         
         drawCircle(balls[i], ctxt)
         if (
             (balls[i].x + balls[i].radius > canvas.width ||
             balls[i].x - balls[i].radius < 0 ||
-            balls[i].y + balls[i].radius > canvas.height// ||)
-            
-            //ball.y - ball.radius  < 0
+            balls[i].y + balls[i].radius > canvas.height
             ) 
             && balls[i].bounceCount < 1
-        ) {
+        ) 
+        {
+            
             balls[i].bounceCount++
 
-            // Re-positioning on the base
- 
-
-            // If we do not re-set the velocities
-            // then the ball will stick to bottom
-
-            // Velocity x
             vx = 0;
-            // Velocity y
+
             balls[i].vy *= -bounce
             balls[i].y -= balls[i].radius
             gravity = -.35
@@ -83,6 +74,7 @@ function animate(){
             balls[i].y -= balls[i].vy
             balls[i].vy += gravity
         }
+
         
     }
     
@@ -99,14 +91,17 @@ function Ball(x,y,radius, color){
     
 }
 function drawCircle(ball,ctxt) {
+    if(ball.y + ball.radius < canvas.height){
+        ctxt.fillStyle = ball.color
+
+        ctxt.beginPath();
+        ctxt.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2, true)
+        ctxt.fill()
+
+        ctxt.closePath()
+    }
     
-    ctxt.fillStyle = ball.color
-
-    ctxt.beginPath();
-    ctxt.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2, true)
-    ctxt.fill()
-
-    ctxt.closePath()
+    
     
     
     
