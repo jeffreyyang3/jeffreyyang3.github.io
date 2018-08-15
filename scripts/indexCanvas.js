@@ -2,7 +2,7 @@ var canvas = document.querySelector('canvas')
 var ctxt = canvas.getContext('2d')
 // fillRect x,y,width,height
 var W = canvas.width = window.innerWidth;
-var H = canvas.height = window.innerHeight - 50;
+var H = canvas.height = window.innerHeight;
 // arc x,y,radius, startangle, endangle (radians), drawccw
 var vx = 0;
 // Velocity y
@@ -10,11 +10,20 @@ var vx = 0;
 var balls = []
 var gravity = -0.35
 var bounce = .8
-window.onload = function (e) {
-    document.getElementById('body').addEventListener('mousemove', function (event) {
+window.onload = function(e){
+    setTimeout(function () {
+        document.getElementById('body').addEventListener('mousemove', function (event) {
 
-        balls.push(new Ball(event.offsetX, event.offsetY, 5, randomColor()))
-    });
+            balls.push(new Ball(event.offsetX, event.offsetY, 8, randomColor()))
+        });
+        document.getElementById('body').addEventListener('click', function (event) {
+            for (let i = 0; i < 9; i++) {
+
+                balls.push(new Ball(event.offsetX, event.offsetY, 8, randomColor()))
+            }
+        });
+    }, 2600)
+
 }
 
 
@@ -35,32 +44,31 @@ function randomColor() {
     }
     return color;
 }
-function animate(){
-    
-    
-  
-    
-    
+function animate() {
+
+
+
+
+
     requestAnimationFrame(animate);
     ctxt.clearRect(0, 0, canvas.width, canvas.height);
 
 
-    
-    
-    for(let i = 0; i < balls.length; i++){
- 
-        
-        
+
+
+    for (let i = 0; i < balls.length; i++) {
+
+
+
         drawCircle(balls[i], ctxt)
         if (
             (balls[i].x + balls[i].radius > canvas.width ||
-            balls[i].x - balls[i].radius < 0 ||
-            balls[i].y + balls[i].radius > canvas.height
-            ) 
+                balls[i].x - balls[i].radius < 0 ||
+                balls[i].y + balls[i].radius > canvas.height
+            )
             && balls[i].bounceCount < 1
-        ) 
-        {
-            
+        ) {
+
             balls[i].bounceCount++
 
             vx = 0;
@@ -69,33 +77,33 @@ function animate(){
             balls[i].y -= balls[i].radius
             gravity = -.35
         }
-        
 
-        else{ 
-            
+
+        else {
+
             balls[i].x += balls[i].vx
 
             balls[i].y -= balls[i].vy
             balls[i].vy += gravity
         }
 
-        
+
     }
-    
-    
+
+
 }
-function Ball(x,y,radius, color){
-    this.vy = 3
+function Ball(x, y, radius, color) {
+    this.vy = 10 * Math.random() - 5
     this.vx = Math.random() * 10 - 5
     this.x = x
     this.y = y
     this.radius = radius
     this.color = color
     this.bounceCount = 0
-    
+
 }
-function drawCircle(ball,ctxt) {
-    if(ball.y + ball.radius < canvas.height){
+function drawCircle(ball, ctxt) {
+    if (ball.y + ball.radius < canvas.height) {
         ctxt.fillStyle = ball.color
 
         ctxt.beginPath();
@@ -104,10 +112,10 @@ function drawCircle(ball,ctxt) {
 
         ctxt.closePath()
     }
-    
-    
-    
-    
-    
-    
+
+
+
+
+
+
 }

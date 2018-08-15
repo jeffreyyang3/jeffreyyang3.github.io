@@ -53,6 +53,17 @@ h2,h3,h4,h5{
 	font-weight: bold;
 
 }
+.descHead{
+	color: black;
+	margin-top: 0px;
+
+	font-size: 280%;
+
+	text-align: left;
+	padding-left: 45px;
+	font-weight: bold;
+
+}
 
 
 .aboutDesc{
@@ -64,6 +75,9 @@ h2,h3,h4,h5{
 	
 	font-weight: 380;
 	line-height: 39px;
+
+}
+.h2.aboutDesc{
 
 }
 
@@ -208,6 +222,18 @@ canvas{
 }
 #about{
 	clear:both;
+}
+.contactInfo{
+	color: black;
+	margin-top: 0px;
+
+	font-size: 200%;
+	float: right;
+
+	text-align: right;
+	padding-left: 45px;
+	font-weight: bold;
+
 }
 
 
