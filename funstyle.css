@@ -144,11 +144,15 @@ li.active a {
   color: #333;
 }
 .projectDescription{
+	list-style-position: inside;
 	text-align: center;
 	
 	font-family: 'Roboto', sans-serif;
   	font-size: 20px;
 }
+
+
+
 
 
 
