@@ -29,7 +29,6 @@ document.getElementById('banvas').addEventListener('click', function(event){
 	//mouse
 	
 	arry.push(new Ball(event.offsetX,event.offsetY));
-	console.log(event.clientX, event.clientY);
 });
 
 

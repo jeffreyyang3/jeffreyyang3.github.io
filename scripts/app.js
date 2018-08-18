@@ -59,6 +59,7 @@ var vm = new Vue({
                 display: 'block',
                 backgroundColor: colorArry[Math.floor(Math.random() * colorArry.length)],
                 //opacity: .75,
+                //backgroundColor: '#FC510B'
                 float: 'left',
                 marginTop: '0px'
             
