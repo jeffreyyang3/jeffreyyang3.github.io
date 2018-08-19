@@ -54,7 +54,7 @@ var vm = new Vue({
         divClasses: function(h) {
             return {
                 border: '1px solid black',
-                width: '2.5px',
+                width: '4.1px',
                 height: h + 'px',
                 display: 'block',
                 backgroundColor: colorArry[Math.floor(Math.random() * colorArry.length)],
@@ -80,7 +80,7 @@ var vm = new Vue({
 
     },
     mounted(){
-        this.bigArray(19);
+        this.bigArray(13);
         this.insertionSort();
     }
 
