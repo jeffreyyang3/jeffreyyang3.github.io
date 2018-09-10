@@ -5,6 +5,7 @@
 	<title>More to come!</title>
 	<link rel = "stylesheet" href = "rangeslider.css">
 	<link rel = "stylesheet" href = "funstyle.css">
+	<link href='http://fonts.googleapis.com/css?family=Lato&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
 	<link href="https://fonts.googleapis.com/css?family=Roboto:400,500" rel="stylesheet"> 
 </head>	
 <body>
@@ -30,31 +31,36 @@
 			<a href="index.html"> Home </a>
 		</li>
 	</ul>
+	<div id='content'>
 
 	<h1> Reddit CLI - <a target="_blank" href="https://github.com/jeffreyyang3/redditScript">
 		GitHub
 	</a></h1>
-	<ul class = 'projectDescription'>
-		<li>Command line interface for navigating Reddit </li>
-		<li>Allows user to choose subreddit or post</li>
-		<li>Continuous navigation</li>
-		<li>Written in Python</li>
-		<li>Recursively displays replies</li>
-	</ul>
+	<p class = 'projectDescription'>
+		 A Python script I wrote to browse Reddit through the command line. Perfect for wasting time
+		 while making it look like you're hard at work. It uses urllib3, and Python's standard JSON
+		 and text wrapping libraries. With this script, one can continually browse subreddits
+		 and posts. <br><br>In the process of writing the program, I had problems accounting for differing reply
+		 depth on different comments. I fixed the problems with a recursive approach.
+		It wasn't anything very advanced, but it felt nice to finally apply that concept in a
+		non academic setting.
+	</p> <br>
 	<div class = 'container' id = 'reddit'>
 
 		<img src="redditGif.gif" alt="there was supposed to be a gif here check out the video https://www.youtube.com/watch?v=nWHq1OFa5Yk&feature=youtu.be"> 
 	</div>
 
 	<h1> Data Visualization </h1>
-	<ul class='projectDescription'>
-		<li>Visualizes inputs and outputs for a stochastic process </li>
-		<li>Written with Chart.js and HTML5 Canvas</li>
+	<p class='projectDescription'>
+		Visualizes inputs and outputs for a stochastic process <br>
+		Written with Chart.js and HTML5 Canvas <br>
+
 		
-	</ul>
+		
+	</p>
 	
 	
-	<h2> Input a number between 0 and 1</h3>
+	<h3> Input a number between 0 and 1</h3>
 	<form onsubmit="return false;">	
 		<input placeholder="User Input" type = "text" id = "input"> 
 		
@@ -84,18 +90,19 @@
 
 
 	
-	<h1> Particle Simulation </h1>
-	<ul class='projectDescription'>
-		<li>Simulates random particle movement </li>
-		<li>Written with HTML5 Canvas</li>
+	<h1 style='margin-top: 0px'> Particle Simulation </h1>
+	<p class='projectDescription'>
+		Simulates random particle movement. <br>
+		Written with JS and HTML5 Canvas. <br> <br>
 	
-	</ul>
+	</p>
 	<canvas id = "banvas"></canvas>
 	
-    <p> Click on the canvas to add a particle there<p>
+    <h3> Click on the canvas to add a particle there<h3>
 
     <div class="container">
 		<button type = "button" onclick = "resetcanvas()"> Reset </button>
+	</div>
 	</div>
 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>

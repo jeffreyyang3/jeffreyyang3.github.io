@@ -149,16 +149,16 @@ canvas {
 
  
 .nav{
+	background: #303030;
 
 
-    list-style:none;
-    margin:0;
-    padding:0;
-	text-align:left;
-	background-color: #303030;
-	-webkit-box-shadow: 0 8px 6px -6px #999;
-    -moz-box-shadow: 0 8px 6px -6px #999;
-    box-shadow: 0 8px 6px -6px #999;
+    list-style: none;
+	margin: 0;
+	padding: 0;
+	line-height: 1;
+	display: block;
+	zoom: 1;
+	font-size: 0;
 }
 .nav li{
 	
@@ -167,6 +167,7 @@ canvas {
 		padding:0
 }
 .nav a{
+	font-family: 'lato', sans-serif ;
     display:inline-block;
     padding:10px;
 }
