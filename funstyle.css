@@ -114,13 +114,14 @@ canvas {
 .nav li{
 	
 		display:inline;
-		margin-left: 45px;
+		margin-left: 38px;
 		padding:0
 }
 .nav a{
+	font-family: 'roboto', sans-serif ;
     display:inline-block;
 	padding:10px;
-	font-family: 'lato', sans-serif ;
+
 }
 li:last-child {
   border-right: none;

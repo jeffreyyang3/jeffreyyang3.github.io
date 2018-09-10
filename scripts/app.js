@@ -80,7 +80,7 @@ var vm = new Vue({
 
     },
     mounted(){
-        this.bigArray(16);
+        this.bigArray(17);
         this.insertionSort();
     }
 
