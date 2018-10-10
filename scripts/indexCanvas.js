@@ -23,7 +23,7 @@ window.onload = function(e){
             }
         });
     }, 2600)
-
+  
 }
 
 
