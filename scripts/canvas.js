@@ -66,18 +66,6 @@ function animate(){
 		
 		arry[i].x += arry[i].xvelocity;
 		arry[i].y += arry[i].yvelocity;
-		/*for(i = 0; i < arry.length; i++){
-			for(j = i + 1; j < arry.length; j++){
-				if(arry[i].y + 30 == arry[j].y){
-					arry[i].yvelocity *= -1;
-				}
-				if(arry[i].x + 30 == arry[j].x){
-					arry[i].xvelocity *= -1;
-				}
-
-			}
-		}
-		*/
 		
 
 

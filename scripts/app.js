@@ -7,84 +7,115 @@ function arrayStep(arry,i){
         j--;
     }
     arry[j + 1] = temp;
+    vm.upper = i
+    
     
 }
 function Shuffle(o) {
     for (var j, x, i = o.length; i; j = parseInt(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
     return o;
 };
-colorArry = ['#d50000', '#c51162', '#aa00ff', '#6200ea', '#304ffe', '#2962ff', '#0091ea', '#00b8d4', '#00bfa5', '#00c853', '#64dd17', '#aeea00', '#ffd600', '#ffab00', '#ff6d00', '#dd2c00']
+colorArry = ['#d50000', '#c51162', '#aa00ff', '#6200ea', '#304ffe', '#2962ff', 
+'#0091ea', '#00b8d4', '#00bfa5', '#00c853', '#64dd17', '#aeea00', '#ffd600', '#ffab00', '#ff6d00', '#dd2c00']
 
-
+sortDone = false
 var vm = new Vue({
     el: '#exercise',
     
     data: {
-        number: 0,
-        array: [],   
+
+        array: [],  
+        upper: 0, 
+
+
     },
     
 
     methods:{
         insertionSort: function(){
             setTimeout(function timeoutSort(array, i) {
+
                 if (i < array.length) {
+                    
                     arrayStep(array, i);
-                    setTimeout(timeoutSort, 10, array, i + 1);
+                    
+                    setTimeout(timeoutSort, 40, array, i + 1);
+                    
                 }
-            }, 10, this.array, 0);
+                else{
+                    sortDone = true
+                }
+            }, 40, this.array, 0);
+
+            
 
             return this.array;
 
         },
 
-        bigArray: function (numberStr) {
-            x = parseInt(numberStr)
-            a = []
-            
-            for (i = 0; i < x + 1; i+= 0.15) {
-                a.push(i + 1);
+        createArray: function (arraySize) {
+            this.array = []
+            for(let i = 1; i < arraySize; i++){ 
+                this.array.push(i)
             }
             
 
-            Shuffle(a)
-            this.array = a
+            Shuffle(this.array)
+            
         },
         
-        divClasses: function(h) {
+        divClasses: function(value) {
             return {
-                border: '1px solid black',
-                width: '3px',
-                height: h + 'px',
+                //border: '1px solid black',
+                width: '8px',
+                height: value * .07 + 'em',
                 display: 'block',
-                backgroundColor: colorArry[Math.floor(Math.random() * colorArry.length)],
-                opacity: .85,
+                border: ".05em solid black",
+            
+                backgroundColor: this.rainbowArray[value - 1],
+       
+              
                 //backgroundColor: '#FC510B',
                 float: 'left',
-                marginTop: '0px'
+                marginTop: '0px',
+                backgroundColor: this.rainbowArray[value - 1]
             
 
-            };
-        },
-
-        randomColor: function() {
-            var letters = '0123456789ABCDEF';
-            var color = '#';
-            for(var i = 0; i< 6; i++) {
-                color += letters[Math.floor(Math.random() * 16)];        
             }
-        return color;
+            
         },
-
-
+        createRainbowArray: function(array){
+            for (let i = 0; i < array.length; i++) {
+                let red   = this.sin_to_hex(i, 0 * Math.PI * 2/3, array.length); // 0   deg
+                let blue  = this.sin_to_hex(i, 1 * Math.PI * 2/3, array.length); // 120 deg
+                let green = this.sin_to_hex(i, 2 * Math.PI * 2/3, array.length); // 240 deg
+                array[i] = "#"+ red + green + blue;
+              }
+        },
+        sin_to_hex: function(i, phase, size) {
+            var sin = Math.sin(Math.PI / size * 2 * i + phase);
+            var int = Math.floor(sin * 127) + 128;
+            var hex = int.toString(16);
+          
+            return hex.length === 1 ? "0"+hex : hex;
+        }
 
     },
     mounted(){
-        this.bigArray(17);
-        this.insertionSort();
+        this.createArray(60);
+        this.rainbowArray = new Array(this.array.length)
+        this.createRainbowArray(this.rainbowArray)
+        setTimeout(function(){
+            vm.insertionSort()
+        }, 200)
+       
+        
     }
 
 });
+
+
+
 
 
 
