@@ -39,13 +39,13 @@ var vm = new Vue({
                     
                     arrayStep(array, i);
                     
-                    setTimeout(timeoutSort, 40, array, i + 1);
+                    setTimeout(timeoutSort, 25, array, i + 1);
                     
                 }
                 else{
                     sortDone = true
                 }
-            }, 40, this.array, 0);
+            }, 25, this.array, 0);
 
             
 
@@ -67,10 +67,10 @@ var vm = new Vue({
         divClasses: function(value) {
             return {
                 //border: '1px solid black',
-                width: '8px',
-                height: value * .07 + 'em',
+                width: '5px',
+                height: value * .05 + 'em',
                 display: 'block',
-                border: ".05em solid black",
+                border: ".03em solid black",
             
                 backgroundColor: this.rainbowArray[value - 1],
        
@@ -102,7 +102,7 @@ var vm = new Vue({
 
     },
     mounted(){
-        this.createArray(60);
+        this.createArray(100);
         this.rainbowArray = new Array(this.array.length)
         this.createRainbowArray(this.rainbowArray)
         setTimeout(function(){
