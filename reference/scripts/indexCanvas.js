@@ -10,29 +10,25 @@ var vx = 0;
 var balls = []
 var gravity = -0.35
 var bounce = .8
+var counter = 0
+
 window.onload = function(e){
-    setTimeout(function () {
-        document.getElementById('body').addEventListener('mousemove', function (event) {
+    
+
+    document.getElementById('body').addEventListener('mousemove', event => {
+        if(sortDone){
+            balls.push(new Ball(event.offsetX, event.offsetY, 8, randomColor()))
+        }
+    });
+    document.getElementById('body').addEventListener('click', event => {
+        for (let i = 0; i < 9; i++) {
 
             balls.push(new Ball(event.offsetX, event.offsetY, 8, randomColor()))
-        });
-        document.getElementById('body').addEventListener('click', function (event) {
-            for (let i = 0; i < 9; i++) {
-
-                balls.push(new Ball(event.offsetX, event.offsetY, 8, randomColor()))
-            }
-        });
-    }, 2600)
+        }
+    });
+    
   
 }
-
-
-
-
-
-
-
-
 
 
 animate()
