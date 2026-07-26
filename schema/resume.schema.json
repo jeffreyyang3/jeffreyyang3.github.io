@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://jeffreyyang3.github.io/schema/resume.schema.json",
-  "title": "Jeffrey Yang résumé",
+  "title": "Jeffrey Yang resume",
   "type": "object",
   "additionalProperties": false,
   "required": [

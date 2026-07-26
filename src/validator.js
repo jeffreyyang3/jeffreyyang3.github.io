@@ -22,7 +22,7 @@ const validateSchema = ajv.compile(schema);
 
 export class ResumeValidationError extends Error {
   constructor(issues) {
-    super(`Résumé validation failed:\n${issues.map((issue) => `- ${issue}`).join("\n")}`);
+    super(`Resume validation failed:\n${issues.map((issue) => `- ${issue}`).join("\n")}`);
     this.name = "ResumeValidationError";
     this.issues = issues;
   }

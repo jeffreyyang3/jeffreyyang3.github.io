@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="<%= it.resume.summary %>">
-    <title><%= it.resume.metadata.title %> — Résumé</title>
+    <title><%= it.resume.metadata.title %> — Resume</title>
     <style>
 <%~ it.css %>
     </style>
@@ -12,7 +12,7 @@
   <body>
     <main class="window resume-window">
       <header class="title-bar app-title-bar">
-        <div class="title-bar-text"><%= it.resume.metadata.title %> — Résumé</div>
+        <div class="title-bar-text"><%= it.resume.metadata.title %> — Resume</div>
         <div class="title-bar-controls dummy-window-controls" aria-hidden="true">
           <button type="button" aria-label="Minimize" tabindex="-1"></button>
           <button type="button" aria-label="Maximize" tabindex="-1"></button>
@@ -29,7 +29,7 @@
                 <span><%= it.resume.contact.location %></span>
                 <span><a href="mailto:<%= it.resume.contact.email %>"><%= it.resume.contact.email %></a></span>
                 <% it.resume.contact.profiles.forEach(function (profile) { %>
-                <span><a href="<%= profile.url %>"><%= profile.display %></a></span>
+                <span><a href="<%= profile.url %>" target="_blank" rel="noopener noreferrer"><%= profile.display %></a></span>
                 <% }) %>
                 <span><a href="tel:<%= it.phoneUri %>"><%= it.resume.contact.phone %></a></span>
               </address>
@@ -42,7 +42,7 @@
             ><%= it.resume.download.label %></a>
           </header>
 
-          <article class="resume-article" aria-label="Résumé">
+          <article class="resume-article" aria-label="Resume">
               <section id="summary" aria-label="Summary">
                 <p class="summary-copy"><%= it.resume.summary %></p>
               </section>
@@ -114,7 +114,7 @@
 
       <footer class="status-bar">
         <p class="status-bar-field">HTML: <%= it.htmlSizeKiB %> KiB</p>
-        <p class="status-bar-field">Made with <a href="https://jdan.github.io/98.css/">98.css</a></p>
+        <p class="status-bar-field">Made with <a href="https://jdan.github.io/98.css/" target="_blank" rel="noopener noreferrer">98.css</a></p>
       </footer>
     </main>
   </body>

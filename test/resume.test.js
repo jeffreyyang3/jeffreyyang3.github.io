@@ -79,7 +79,7 @@ function expectInvalid(mutator, expectedMessage) {
   );
 }
 
-test("canonical résumé validates and preserves the source facts", () => {
+test("canonical resume validates and preserves the source facts", () => {
   assert.equal(validateResume(resume), resume);
   assert.equal(resume.summary, "Senior software engineer with 5+ years of full-stack experience across consumer and enterprise products.");
   assert.deepEqual(
@@ -291,10 +291,25 @@ test("generated HTML has the required semantic structure and links", () => {
   assert.ok(
     links.some(
       (link) =>
+        attribute(link, "href") ===
+        "https://www.linkedin.com/in/jeffreyyang3"
+    )
+  );
+  assert.ok(
+    links.some(
+      (link) =>
         attribute(link, "href") === "https://jdan.github.io/98.css/" &&
         textContent(link) === "98.css"
     )
   );
+  const externalLinks = links.filter((link) =>
+    /^https:\/\//u.test(attribute(link, "href") ?? "")
+  );
+  assert.ok(externalLinks.length > 0);
+  for (const link of externalLinks) {
+    assert.equal(attribute(link, "target"), "_blank");
+    assert.equal(attribute(link, "rel"), "noopener noreferrer");
+  }
 
   const pdfLink = links.find(
     (link) => attribute(link, "href") === resume.download.path
@@ -303,9 +318,12 @@ test("generated HTML has the required semantic structure and links", () => {
   assert.ok(hasAttribute(pdfLink, "download"));
   assert.equal(attribute(pdfLink, "download"), resume.download.path);
   assert.equal(attribute(pdfLink, "type"), "application/pdf");
+  assert.equal(textContent(pdfLink), "Download Resume");
+  assert.equal(hasAttribute(pdfLink, "target"), false);
+  assert.doesNotMatch(html, /r\u00e9sum\u00e9/iu);
 });
 
-test("résumé uses one flat window surface with a solid desktop", () => {
+test("resume uses one flat window surface with a solid desktop", () => {
   const html = renderSite({ resume });
   const document = parse(html);
   const nodes = elements(document);
@@ -363,7 +381,7 @@ test("résumé uses one flat window surface with a solid desktop", () => {
     css.match(/\.status-bar-field:last-child\s*\{([^}]*)\}/u)?.[1] ?? "";
   assert.match(
     nameRules,
-    /font-family: "Pixelated MS Sans Serif", Arial, sans-serif;/u
+    /font-family: Arial, Helvetica, sans-serif;/u
   );
   assert.match(nameRules, /margin: 6px 0 8px;/u);
   assert.doesNotMatch(sectionHeadingRules, /Pixelated MS Sans Serif/u);
@@ -459,6 +477,6 @@ test("status reports the final UTF-8 HTML size", () => {
   assert.doesNotMatch(html, /Gzip:/u);
   assert.match(
     html,
-    /<p class="status-bar-field">Made with <a href="https:\/\/jdan\.github\.io\/98\.css\/">98\.css<\/a><\/p>/u
+    /<p class="status-bar-field">Made with <a href="https:\/\/jdan\.github\.io\/98\.css\/" target="_blank" rel="noopener noreferrer">98\.css<\/a><\/p>/u
   );
 });
