@@ -37,8 +37,9 @@
             <a
               class="download-link"
               href="<%= it.resume.download.path %>"
-              download="<%= it.resume.download.path %>"
               type="<%= it.resume.download.mimeType %>"
+              target="_blank"
+              rel="noopener noreferrer"
             ><%= it.resume.download.label %></a>
           </header>
 

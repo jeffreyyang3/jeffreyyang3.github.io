@@ -7,7 +7,7 @@ import { Eta } from "eta";
 import {
   projectRoot as defaultProjectRoot,
   readResume,
-  validateResume
+  validateResume,
 } from "./validator.js";
 
 const sourceDirectory = dirname(fileURLToPath(import.meta.url));
@@ -25,13 +25,13 @@ function load98Css(rootDirectory) {
     ["ms_sans_serif.woff", "font/woff"],
     ["ms_sans_serif.woff2", "font/woff2"],
     ["ms_sans_serif_bold.woff", "font/woff"],
-    ["ms_sans_serif_bold.woff2", "font/woff2"]
+    ["ms_sans_serif_bold.woff2", "font/woff2"],
   ];
 
   for (const [filename, mimeType] of fonts) {
     css = css.replaceAll(
       `url(${filename})`,
-      `url("${dataUri(resolve(packageDirectory, filename), mimeType)}")`
+      `url("${dataUri(resolve(packageDirectory, filename), mimeType)}")`,
     );
   }
 
@@ -43,32 +43,39 @@ export function formatYearMonth(value) {
   return new Intl.DateTimeFormat("en-US", {
     month: "short",
     year: "numeric",
-    timeZone: "UTC"
+    timeZone: "UTC",
   }).format(new Date(Date.UTC(year, month - 1, 1)));
 }
 
 export function renderSite({
   resume,
   rootDirectory = defaultProjectRoot,
-  template = readFileSync(resolve(sourceDirectory, "resume.eta"), "utf8")
+  template = readFileSync(resolve(sourceDirectory, "resume.eta"), "utf8"),
 }) {
   const frameworkCss = load98Css(rootDirectory);
-  const customCss = readFileSync(resolve(sourceDirectory, "styles.css"), "utf8");
+  const customCss = readFileSync(
+    resolve(sourceDirectory, "styles.css"),
+    "utf8",
+  );
   const phoneUri = `+1${resume.contact.phone.replaceAll("-", "")}`;
   const render = (htmlSizeKiB) =>
-    `${eta.renderString(template, {
-      resume,
-      css: `${frameworkCss}\n${customCss}`,
-      phoneUri,
-      formatYearMonth,
-      htmlSizeKiB
-    }).trimEnd()}\n`;
+    `${eta
+      .renderString(template, {
+        resume,
+        css: `${frameworkCss}\n${customCss}`,
+        phoneUri,
+        formatYearMonth,
+        htmlSizeKiB,
+      })
+      .trimEnd()}\n`;
 
   let htmlSizeKiB = "0.0";
 
   for (let pass = 0; pass < 20; pass += 1) {
     const html = render(htmlSizeKiB);
-    const measuredHtmlSize = (Buffer.byteLength(html, "utf8") / 1024).toFixed(1);
+    const measuredHtmlSize = (Buffer.byteLength(html, "utf8") / 1024).toFixed(
+      1,
+    );
 
     if (measuredHtmlSize === htmlSizeKiB) {
       return html;
@@ -83,7 +90,7 @@ export function renderSite({
 export function buildSite({
   rootDirectory = defaultProjectRoot,
   outputDirectory = resolve(rootDirectory, "dist"),
-  resume = readResume(rootDirectory)
+  resume = readResume(rootDirectory),
 } = {}) {
   validateResume(resume, { rootDirectory });
 
@@ -92,14 +99,15 @@ export function buildSite({
   writeFileSync(resolve(outputDirectory, "index.html"), html, "utf8");
   copyFileSync(
     resolve(rootDirectory, resume.download.path),
-    resolve(outputDirectory, resume.download.path)
+    resolve(outputDirectory, resume.download.path),
   );
 
   return { html, outputDirectory };
 }
 
 const isDirectInvocation =
-  process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url);
+  process.argv[1] &&
+  resolve(process.argv[1]) === fileURLToPath(import.meta.url);
 
 if (isDirectInvocation) {
   try {

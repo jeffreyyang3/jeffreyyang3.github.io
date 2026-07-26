@@ -12,7 +12,7 @@ const schema = JSON.parse(readFileSync(schemaPath, "utf8"));
 
 const ajv = new Ajv2020({
   allErrors: true,
-  strict: true
+  strict: true,
 });
 
 addFormats(ajv);
@@ -22,7 +22,9 @@ const validateSchema = ajv.compile(schema);
 
 export class ResumeValidationError extends Error {
   constructor(issues) {
-    super(`Resume validation failed:\n${issues.map((issue) => `- ${issue}`).join("\n")}`);
+    super(
+      `Resume validation failed:\n${issues.map((issue) => `- ${issue}`).join("\n")}`,
+    );
     this.name = "ResumeValidationError";
     this.issues = issues;
   }
@@ -32,17 +34,19 @@ function collectIds(resume) {
   return [
     ...resume.contact.profiles.map(({ id }) => id),
     ...resume.experience.map(({ id }) => id),
-    ...resume.education.map(({ id }) => id)
+    ...resume.education.map(({ id }) => id),
   ];
 }
 
 export function readResume(rootDirectory = projectRoot) {
-  return JSON.parse(readFileSync(resolve(rootDirectory, "resume.json"), "utf8"));
+  return JSON.parse(
+    readFileSync(resolve(rootDirectory, "resume.json"), "utf8"),
+  );
 }
 
 export function validateResume(
   resume,
-  { rootDirectory = projectRoot, checkDownloads = true } = {}
+  { rootDirectory = projectRoot, checkDownloads = true } = {},
 ) {
   const issues = [];
 
@@ -51,13 +55,15 @@ export function validateResume(
       ...validateSchema.errors.map((error) => {
         const location = error.instancePath || "/";
         return `${location} ${error.message}`;
-      })
+      }),
     );
   }
 
   if (issues.length === 0) {
     const ids = collectIds(resume);
-    const duplicateIds = [...new Set(ids.filter((id, index) => ids.indexOf(id) !== index))];
+    const duplicateIds = [
+      ...new Set(ids.filter((id, index) => ids.indexOf(id) !== index)),
+    ];
 
     if (duplicateIds.length > 0) {
       issues.push(`duplicate IDs: ${duplicateIds.join(", ")}`);
@@ -73,7 +79,9 @@ export function validateResume(
         (role.promotedAt < role.startDate ||
           (role.endDate !== null && role.promotedAt > role.endDate))
       ) {
-        issues.push(`${role.id} promotion date is outside its employment dates`);
+        issues.push(
+          `${role.id} promotion date is outside its employment dates`,
+        );
       }
     }
 

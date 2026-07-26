@@ -4,7 +4,8 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "validate": "node src/validate.js",
+    "validate": "node src/validate.js && prettier --check .",
+    "format": "prettier --write .",
     "build": "node src/build.js",
     "test": "node --test"
   },
@@ -12,7 +13,8 @@
     "98.css": "0.1.21",
     "ajv": "8.20.0",
     "ajv-formats": "3.0.1",
-    "eta": "4.6.0"
+    "eta": "4.6.0",
+    "prettier": "^3.9.6"
   },
   "devDependencies": {
     "parse5": "8.0.1"

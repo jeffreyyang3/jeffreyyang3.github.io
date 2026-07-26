@@ -317,11 +317,11 @@ test("generated HTML has the required semantic structure and links", () => {
     (link) => attribute(link, "href") === resume.download.path,
   );
   assert.ok(pdfLink);
-  assert.ok(hasAttribute(pdfLink, "download"));
-  assert.equal(attribute(pdfLink, "download"), resume.download.path);
+  assert.equal(hasAttribute(pdfLink, "download"), false);
   assert.equal(attribute(pdfLink, "type"), "application/pdf");
   assert.equal(textContent(pdfLink), "Resume PDF");
-  assert.equal(hasAttribute(pdfLink, "target"), false);
+  assert.equal(attribute(pdfLink, "target"), "_blank");
+  assert.equal(attribute(pdfLink, "rel"), "noopener noreferrer");
   assert.doesNotMatch(html, /r\u00e9sum\u00e9/iu);
 });
 

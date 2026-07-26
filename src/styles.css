@@ -245,7 +245,6 @@ body {
   .entry-dates {
     margin-top: 4px;
   }
-
 }
 
 @media print {
@@ -271,5 +270,4 @@ body {
   .window-body {
     margin: 0;
   }
-
 }
