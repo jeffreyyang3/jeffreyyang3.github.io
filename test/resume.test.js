@@ -374,6 +374,8 @@ test("resume uses one flat window surface with a solid desktop", () => {
     css.match(/\.resume-article h2\s*\{([^}]*)\}/u)?.[1] ?? "";
   const downloadRules =
     css.match(/\.download-link\s*\{([^}]*)\}/u)?.[1] ?? "";
+  const contactRules =
+    css.match(/\.contact-details\s*\{([^}]*)\}/u)?.[1] ?? "";
   const statusRules = [...css.matchAll(/\.status-bar\s*\{([^}]*)\}/gu)]
     .map((match) => match[1])
     .join("\n");
@@ -384,6 +386,7 @@ test("resume uses one flat window surface with a solid desktop", () => {
     /font-family: Arial, Helvetica, sans-serif;/u
   );
   assert.match(nameRules, /margin: 6px 0 8px;/u);
+  assert.match(contactRules, /font-size: 15px;/u);
   assert.doesNotMatch(sectionHeadingRules, /Pixelated MS Sans Serif/u);
   assert.match(
     downloadRules,
@@ -404,7 +407,6 @@ test("resume uses one flat window surface with a solid desktop", () => {
   for (const expectedSize of [
     "font-size: 12px",
     "font-size: 13px",
-    "font-size: 14px",
     "font-size: 15px",
     "font-size: 17px",
     "font-size: 18px",
