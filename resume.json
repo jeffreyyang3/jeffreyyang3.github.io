@@ -84,7 +84,7 @@
     }
   ],
   "download": {
-    "label": "Download Resume",
+    "label": "Resume PDF",
     "path": "jeffrey_yang_resume.pdf",
     "mimeType": "application/pdf"
   }

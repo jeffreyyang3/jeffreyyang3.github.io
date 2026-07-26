@@ -1,11 +1,6 @@
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
-import {
-  existsSync,
-  mkdtempSync,
-  readFileSync,
-  rmSync
-} from "node:fs";
+import { existsSync, mkdtempSync, readFileSync, rmSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
 import test from "node:test";
@@ -17,7 +12,7 @@ import {
   projectRoot,
   readResume,
   ResumeValidationError,
-  validateResume
+  validateResume,
 } from "../src/validator.js";
 
 const resume = readResume();
@@ -75,51 +70,57 @@ function expectInvalid(mutator, expectedMessage) {
     () => validateResume(candidate, { checkDownloads: false }),
     (error) =>
       error instanceof ResumeValidationError &&
-      expectedMessage.test(error.message)
+      expectedMessage.test(error.message),
   );
 }
 
 test("canonical resume validates and preserves the source facts", () => {
   assert.equal(validateResume(resume), resume);
-  assert.equal(resume.summary, "Senior software engineer with 5+ years of full-stack experience across consumer and enterprise products.");
+  assert.equal(
+    resume.summary,
+    "Senior software engineer with 5+ years of full-stack experience across consumer and enterprise products.",
+  );
   assert.deepEqual(
     resume.experience.map(({ company, title, startDate, endDate }) => ({
       company,
       title,
       startDate,
-      endDate
+      endDate,
     })),
     [
       {
         company: "Celonis",
         title: "Senior Software Engineer",
         startDate: "2023-01",
-        endDate: null
+        endDate: null,
       },
       {
         company: "Opendoor",
         title: "Software Engineer",
         startDate: "2022-03",
-        endDate: "2022-11"
+        endDate: "2022-11",
       },
       {
         company: "Poshmark",
         title: "Software Engineer",
         startDate: "2021-01",
-        endDate: "2022-02"
-      }
-    ]
+        endDate: "2022-02",
+      },
+    ],
   );
   assert.equal(resume.experience[0].promotedAt, "2025-10");
-  assert.deepEqual(resume.experience.map(({ highlights }) => highlights.length), [8, 5, 4]);
+  assert.deepEqual(
+    resume.experience.map(({ highlights }) => highlights.length),
+    [8, 5, 4],
+  );
   assert.deepEqual(resume.education, [
     {
       id: "uc-santa-cruz",
       institution: "University of California, Santa Cruz",
       degree: "B.S. Computer Science",
       graduationYear: 2020,
-      location: "Santa Cruz, CA"
-    }
+      location: "Santa Cruz, CA",
+    },
   ]);
 });
 
@@ -173,7 +174,7 @@ test("validation rejects a missing PDF", () => {
   try {
     assert.throws(
       () => validateResume(resume, { rootDirectory: temporaryRoot }),
-      /download does not exist/u
+      /download does not exist/u,
     );
   } finally {
     rmSync(temporaryRoot, { recursive: true, force: true });
@@ -189,7 +190,7 @@ test("invalid input fails before the output directory is created", () => {
   try {
     assert.throws(
       () => buildSite({ resume: candidate, outputDirectory }),
-      ResumeValidationError
+      ResumeValidationError,
     );
     assert.equal(existsSync(outputDirectory), false);
   } finally {
@@ -208,15 +209,15 @@ test("build is deterministic and copies the PDF unchanged", () => {
 
     assert.equal(
       readFileSync(resolve(first, "index.html"), "utf8"),
-      readFileSync(resolve(second, "index.html"), "utf8")
+      readFileSync(resolve(second, "index.html"), "utf8"),
     );
     assert.equal(
       sha256(resolve(projectRoot, resume.download.path)),
-      sha256(resolve(first, resume.download.path))
+      sha256(resolve(first, resume.download.path)),
     );
     assert.equal(
       sha256(resolve(first, resume.download.path)),
-      sha256(resolve(second, resume.download.path))
+      sha256(resolve(second, resume.download.path)),
     );
   } finally {
     rmSync(temporaryRoot, { recursive: true, force: true });
@@ -230,22 +231,22 @@ test("generated HTML has the required semantic structure and links", () => {
 
   assert.equal(
     nodes.filter((element) => classes(element).includes("window")).length,
-    1
+    1,
   );
 
   const titleBar = nodes.find((element) =>
-    classes(element).includes("app-title-bar")
+    classes(element).includes("app-title-bar"),
   );
   const titleBarControls = elements(titleBar).find((element) =>
-    classes(element).includes("dummy-window-controls")
+    classes(element).includes("dummy-window-controls"),
   );
   const titleBarButtons = elements(titleBarControls).filter(
-    (element) => element.tagName === "button"
+    (element) => element.tagName === "button",
   );
   assert.equal(attribute(titleBarControls, "aria-hidden"), "true");
   assert.deepEqual(
     titleBarButtons.map((button) => attribute(button, "aria-label")),
-    ["Minimize", "Maximize", "Close"]
+    ["Minimize", "Maximize", "Close"],
   );
   for (const button of titleBarButtons) {
     assert.equal(attribute(button, "type"), "button");
@@ -258,52 +259,53 @@ test("generated HTML has the required semantic structure and links", () => {
     "address",
     "article",
     "section",
-    "time"
+    "time",
   ]) {
-    assert.ok(nodes.some((element) => element.tagName === tagName), `missing <${tagName}>`);
+    assert.ok(
+      nodes.some((element) => element.tagName === tagName),
+      `missing <${tagName}>`,
+    );
   }
 
   const summarySection = nodes.find(
-    (element) => attribute(element, "id") === "summary"
+    (element) => attribute(element, "id") === "summary",
   );
   assert.equal(attribute(summarySection, "aria-label"), "Summary");
   assert.equal(
-    elements(summarySection).filter((element) => element.tagName === "h2").length,
-    0
+    elements(summarySection).filter((element) => element.tagName === "h2")
+      .length,
+    0,
   );
 
   const links = nodes.filter((element) => element.tagName === "a");
   assert.ok(
     links.some(
-      (link) =>
-        attribute(link, "href") === "mailto:jeffreydavidyang@gmail.com"
-    )
+      (link) => attribute(link, "href") === "mailto:jeffreydavidyang@gmail.com",
+    ),
   );
   assert.ok(
-    links.some((link) => attribute(link, "href") === "tel:+16268182618")
+    links.some((link) => attribute(link, "href") === "tel:+16268182618"),
+  );
+  assert.ok(
+    links.some(
+      (link) => attribute(link, "href") === "https://github.com/jeffreyyang3",
+    ),
   );
   assert.ok(
     links.some(
       (link) =>
-        attribute(link, "href") === "https://github.com/jeffreyyang3"
-    )
-  );
-  assert.ok(
-    links.some(
-      (link) =>
-        attribute(link, "href") ===
-        "https://www.linkedin.com/in/jeffreyyang3"
-    )
+        attribute(link, "href") === "https://www.linkedin.com/in/jeffreyyang3",
+    ),
   );
   assert.ok(
     links.some(
       (link) =>
         attribute(link, "href") === "https://jdan.github.io/98.css/" &&
-        textContent(link) === "98.css"
-    )
+        textContent(link) === "98.css",
+    ),
   );
   const externalLinks = links.filter((link) =>
-    /^https:\/\//u.test(attribute(link, "href") ?? "")
+    /^https:\/\//u.test(attribute(link, "href") ?? ""),
   );
   assert.ok(externalLinks.length > 0);
   for (const link of externalLinks) {
@@ -312,13 +314,13 @@ test("generated HTML has the required semantic structure and links", () => {
   }
 
   const pdfLink = links.find(
-    (link) => attribute(link, "href") === resume.download.path
+    (link) => attribute(link, "href") === resume.download.path,
   );
   assert.ok(pdfLink);
   assert.ok(hasAttribute(pdfLink, "download"));
   assert.equal(attribute(pdfLink, "download"), resume.download.path);
   assert.equal(attribute(pdfLink, "type"), "application/pdf");
-  assert.equal(textContent(pdfLink), "Download Resume");
+  assert.equal(textContent(pdfLink), "Resume PDF");
   assert.equal(hasAttribute(pdfLink, "target"), false);
   assert.doesNotMatch(html, /r\u00e9sum\u00e9/iu);
 });
@@ -328,26 +330,37 @@ test("resume uses one flat window surface with a solid desktop", () => {
   const document = parse(html);
   const nodes = elements(document);
   const resumeDocument = nodes.find((element) =>
-    classes(element).includes("resume-document")
+    classes(element).includes("resume-document"),
   );
   const documentNodes = elements(resumeDocument);
 
   assert.ok(classes(resumeDocument).includes("resume-document"));
-  assert.equal(nodes.filter((element) => element.tagName === "aside").length, 0);
+  assert.equal(
+    nodes.filter((element) => element.tagName === "aside").length,
+    0,
+  );
   assert.equal(nodes.filter((element) => element.tagName === "nav").length, 0);
-  assert.equal(nodes.filter((element) => element.tagName === "button").length, 3);
-  assert.equal(nodes.filter((element) => element.tagName === "script").length, 0);
-  assert.ok(
-    documentNodes.some(
-      (element) =>
-        element.tagName === "header" && classes(element).includes("resume-heading")
-    )
+  assert.equal(
+    nodes.filter((element) => element.tagName === "button").length,
+    3,
+  );
+  assert.equal(
+    nodes.filter((element) => element.tagName === "script").length,
+    0,
   );
   assert.ok(
     documentNodes.some(
       (element) =>
-        element.tagName === "article" && classes(element).includes("resume-article")
-    )
+        element.tagName === "header" &&
+        classes(element).includes("resume-heading"),
+    ),
+  );
+  assert.ok(
+    documentNodes.some(
+      (element) =>
+        element.tagName === "article" &&
+        classes(element).includes("resume-article"),
+    ),
   );
 
   const css = nodes
@@ -356,50 +369,42 @@ test("resume uses one flat window surface with a solid desktop", () => {
     .join("\n");
   const headingRules = css.match(/\.resume-heading\s*\{([^}]*)\}/u)?.[1] ?? "";
   const articleRules = css.match(/\.resume-article\s*\{([^}]*)\}/u)?.[1] ?? "";
-  const documentRules = css.match(/\.resume-document\s*\{([^}]*)\}/u)?.[1] ?? "";
+  const documentRules =
+    css.match(/\.resume-document\s*\{([^}]*)\}/u)?.[1] ?? "";
   const bodyRules = [...css.matchAll(/body\s*\{([^}]*)\}/gu)]
     .map((match) => match[1])
     .join("\n");
 
   assert.doesNotMatch(headingRules, /background|box-shadow/u);
   assert.doesNotMatch(articleRules, /background|box-shadow/u);
-  assert.match(
-    documentRules,
-    /font-family: Arial, Helvetica, sans-serif;/u
-  );
+  assert.match(documentRules, /font-family: Arial, Helvetica, sans-serif;/u);
   assert.doesNotMatch(articleRules, /font-family/u);
-  const nameRules =
-    css.match(/\.resume-heading h1\s*\{([^}]*)\}/u)?.[1] ?? "";
+  const nameRules = css.match(/\.resume-heading h1\s*\{([^}]*)\}/u)?.[1] ?? "";
   const sectionHeadingRules =
     css.match(/\.resume-article h2\s*\{([^}]*)\}/u)?.[1] ?? "";
-  const downloadRules =
-    css.match(/\.download-link\s*\{([^}]*)\}/u)?.[1] ?? "";
-  const contactRules =
-    css.match(/\.contact-details\s*\{([^}]*)\}/u)?.[1] ?? "";
+  const downloadRules = css.match(/\.download-link\s*\{([^}]*)\}/u)?.[1] ?? "";
+  const contactRules = css.match(/\.contact-details\s*\{([^}]*)\}/u)?.[1] ?? "";
   const statusRules = [...css.matchAll(/\.status-bar\s*\{([^}]*)\}/gu)]
     .map((match) => match[1])
     .join("\n");
   const statusCreditRules =
     css.match(/\.status-bar-field:last-child\s*\{([^}]*)\}/u)?.[1] ?? "";
-  assert.match(
-    nameRules,
-    /font-family: Arial, Helvetica, sans-serif;/u
-  );
+  assert.match(nameRules, /font-family: Arial, Helvetica, sans-serif;/u);
   assert.match(nameRules, /margin: 6px 0 8px;/u);
   assert.match(contactRules, /font-size: 15px;/u);
   assert.doesNotMatch(sectionHeadingRules, /Pixelated MS Sans Serif/u);
   assert.match(
     downloadRules,
-    /font-family: "Pixelated MS Sans Serif", Arial, sans-serif;/u
+    /font-family: "Pixelated MS Sans Serif", Arial, sans-serif;/u,
   );
   assert.match(
     statusRules,
-    /font-family: "Pixelated MS Sans Serif", Arial, sans-serif;/u
+    /font-family: "Pixelated MS Sans Serif", Arial, sans-serif;/u,
   );
   assert.match(statusCreditRules, /text-align: right;/u);
   assert.match(
     css,
-    /\.dummy-window-controls\s*\{\s*pointer-events: none;\s*\}/u
+    /\.dummy-window-controls\s*\{\s*pointer-events: none;\s*\}/u,
   );
   assert.match(bodyRules, /background: #008080;/u);
   assert.match(bodyRules, /font-size: 13px;/u);
@@ -411,13 +416,13 @@ test("resume uses one flat window surface with a solid desktop", () => {
     "font-size: 17px",
     "font-size: 18px",
     "font-size: 21px",
-    "font-size: clamp(29px, calc(5vw + 1px), 45px)"
+    "font-size: clamp(29px, calc(5vw + 1px), 45px)",
   ]) {
     assert.ok(css.includes(expectedSize), `missing ${expectedSize}`);
   }
   assert.doesNotMatch(
     `${html}\n${css}`,
-    /resume-explorer|explorer-toggle|resume-workspace|Hide summary|Show summary/u
+    /resume-explorer|explorer-toggle|resume-workspace|Hide summary|Show summary/u,
   );
 });
 
@@ -426,13 +431,15 @@ test("all JSON-derived text is escaped by the template", () => {
   candidate.summary = `<script>alert("unsafe")</script> & "quoted"`;
   const html = renderSite({ resume: candidate });
   const document = parse(html);
-  const scripts = elements(document).filter((element) => element.tagName === "script");
+  const scripts = elements(document).filter(
+    (element) => element.tagName === "script",
+  );
 
   assert.equal(scripts.length, 0);
   assert.doesNotMatch(html, /<script>alert\("unsafe"\)<\/script>/u);
   assert.match(
     html,
-    /&lt;script&gt;alert\(&quot;unsafe&quot;\)&lt;\/script&gt; &amp; &quot;quoted&quot;/u
+    /&lt;script&gt;alert\(&quot;unsafe&quot;\)&lt;\/script&gt; &amp; &quot;quoted&quot;/u,
   );
 });
 
@@ -444,17 +451,18 @@ test("page has no runtime network dependencies", () => {
   assert.equal(nodes.filter((element) => element.tagName === "link").length, 0);
   assert.equal(
     nodes.filter(
-      (element) => element.tagName === "script" && attribute(element, "src")
+      (element) => element.tagName === "script" && attribute(element, "src"),
     ).length,
-    0
+    0,
   );
   assert.equal(
     nodes.filter(
       (element) =>
-        ["img", "iframe", "audio", "video", "source"].includes(element.tagName) &&
-        attribute(element, "src")
+        ["img", "iframe", "audio", "video", "source"].includes(
+          element.tagName,
+        ) && attribute(element, "src"),
     ).length,
-    0
+    0,
   );
 
   const css = nodes
@@ -479,6 +487,6 @@ test("status reports the final UTF-8 HTML size", () => {
   assert.doesNotMatch(html, /Gzip:/u);
   assert.match(
     html,
-    /<p class="status-bar-field">Made with <a href="https:\/\/jdan\.github\.io\/98\.css\/" target="_blank" rel="noopener noreferrer">98\.css<\/a><\/p>/u
+    /<p class="status-bar-field">Made with <a href="https:\/\/jdan\.github\.io\/98\.css\/" target="_blank" rel="noopener noreferrer">98\.css<\/a><\/p>/u,
   );
 });
