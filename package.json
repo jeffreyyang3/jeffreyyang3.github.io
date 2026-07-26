@@ -1,50 +1,23 @@
 {
-  "name": "personalwebsite",
-  "version": "0.1.0",
+  "name": "jeffreyyang3.github.io",
+  "version": "1.0.0",
   "private": true,
+  "type": "module",
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint",
-    "deploy": "yarn build && cp dist/index.html dist/404.html && echo 'jeffreyyang.me' > dist/CNAME && git add -f dist && git commit -m 'deploy' && git push origin `git subtree split --prefix dist gh-pages`:gh-pages --force && git subtree push --prefix dist origin gh-pages && git reset HEAD~"
+    "validate": "node src/validate.js",
+    "build": "node src/build.js",
+    "test": "node --test"
   },
   "dependencies": {
-    "node-sass": "^4.13.0",
-    "sass-loader": "^8.0.0",
-    "vue": "^2.5.21",
-    "vue-router": "^3.0.2"
+    "98.css": "0.1.21",
+    "ajv": "8.20.0",
+    "ajv-formats": "3.0.1",
+    "eta": "4.6.0"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "^3.3.0",
-    "@vue/cli-plugin-eslint": "^3.3.0",
-    "@vue/cli-service": "^3.3.0",
-    "babel-eslint": "^10.0.1",
-    "eslint": "^5.8.0",
-    "eslint-plugin-vue": "^5.0.0",
-    "vue-template-compiler": "^2.5.21"
+    "parse5": "8.0.1"
   },
-  "eslintConfig": {
-    "root": true,
-    "env": {
-      "node": true
-    },
-    "extends": [
-      "plugin:vue/essential",
-      "eslint:recommended"
-    ],
-    "rules": {},
-    "parserOptions": {
-      "parser": "babel-eslint"
-    }
-  },
-  "postcss": {
-    "plugins": {
-      "autoprefixer": {}
-    }
-  },
-  "browserslist": [
-    "> 1%",
-    "last 2 versions",
-    "not ie <= 8"
-  ]
+  "engines": {
+    "node": ">=24"
+  }
 }

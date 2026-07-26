@@ -1,0 +1,275 @@
+:root {
+  color-scheme: light;
+  background: #008080;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-width: 280px;
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  padding: clamp(12px, 3vw, 36px);
+  background: #008080;
+  font-size: 13px;
+}
+
+.resume-window {
+  width: min(1120px, 100%);
+  margin: 0 auto;
+  font-size: 12px;
+}
+
+.app-title-bar {
+  min-height: 25px;
+}
+
+.app-title-bar .title-bar-text {
+  font-size: 13px;
+}
+
+.dummy-window-controls {
+  pointer-events: none;
+}
+
+.window-body {
+  margin: 12px;
+}
+
+.resume-heading {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 10px 20px;
+  align-items: start;
+  padding: 0 4px 16px;
+}
+
+.resume-heading h1 {
+  margin: 6px 0 8px;
+  font-family: "Pixelated MS Sans Serif", Arial, sans-serif;
+  font-size: clamp(29px, calc(5vw + 1px), 45px);
+  line-height: 1;
+}
+
+.contact-details {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px 8px;
+  margin: 0;
+  font-style: normal;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.contact-details span:not(:last-child)::after {
+  content: "•";
+  margin-left: 8px;
+  color: #666;
+}
+
+.download-link {
+  display: inline-flex;
+  min-height: 30px;
+  align-items: center;
+  padding: 5px 12px;
+  color: #222;
+  font-family: "Pixelated MS Sans Serif", Arial, sans-serif;
+  white-space: nowrap;
+  text-decoration: none;
+  background: silver;
+  box-shadow:
+    inset -1px -1px #0a0a0a,
+    inset 1px 1px #fff,
+    inset -2px -2px grey,
+    inset 2px 2px #dfdfdf;
+}
+
+.download-link:active {
+  box-shadow:
+    inset -1px -1px #fff,
+    inset 1px 1px #0a0a0a,
+    inset -2px -2px #dfdfdf,
+    inset 2px 2px grey;
+}
+
+.download-link:focus-visible,
+.resume-article a:focus-visible {
+  outline: 2px solid navy;
+  outline-offset: 2px;
+}
+
+.resume-document {
+  min-width: 0;
+  padding: 0 6px 8px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.resume-article {
+  min-width: 0;
+  color: #171717;
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+.resume-article section {
+  scroll-margin-top: 16px;
+}
+
+.resume-article > section + section {
+  margin-top: 24px;
+  padding-top: 17px;
+  border-top: 1px solid #808080;
+  box-shadow: inset 0 1px #fff;
+}
+
+.resume-article h2 {
+  margin: 0 0 14px;
+  font-size: 21px;
+  line-height: 1.2;
+}
+
+.resume-article h3 {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 18px;
+  line-height: 1.25;
+}
+
+.summary-copy {
+  margin: 0;
+  font-size: 17px;
+}
+
+.experience-entry + .experience-entry,
+.education-entry + .education-entry {
+  margin-top: 26px;
+}
+
+.entry-heading {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 4px 18px;
+  align-items: start;
+}
+
+.entry-role,
+.entry-place,
+.entry-dates {
+  margin: 2px 0 0;
+}
+
+.entry-place,
+.entry-dates {
+  text-align: right;
+}
+
+.entry-dates {
+  color: #444;
+}
+
+.promotion {
+  font-weight: normal;
+}
+
+.experience-entry ul {
+  margin: 10px 0 0;
+  padding-left: 22px;
+}
+
+.experience-entry li + li {
+  margin-top: 6px;
+}
+
+.status-bar {
+  margin-top: 2px;
+  font-family: "Pixelated MS Sans Serif", Arial, sans-serif;
+}
+
+.status-bar-field:first-child {
+  flex: 1 1 auto;
+}
+
+.status-bar-field:last-child {
+  flex: 0 0 auto;
+  text-align: right;
+}
+
+@media (max-width: 760px) {
+  body {
+    padding: 10px;
+  }
+
+  .window-body {
+    margin: 8px;
+  }
+
+  .resume-heading {
+    grid-template-columns: 1fr;
+  }
+
+  .download-link {
+    justify-self: start;
+  }
+
+  .resume-document {
+    padding-right: 2px;
+    padding-left: 2px;
+  }
+}
+
+@media (max-width: 640px) {
+  .contact-details {
+    display: grid;
+    gap: 3px;
+  }
+
+  .contact-details span::after {
+    content: none !important;
+  }
+
+  .entry-heading {
+    grid-template-columns: 1fr;
+  }
+
+  .entry-place,
+  .entry-dates {
+    text-align: left;
+  }
+
+  .entry-dates {
+    margin-top: 4px;
+  }
+
+}
+
+@media print {
+  :root,
+  body {
+    background: #fff;
+  }
+
+  body {
+    padding: 0;
+  }
+
+  .resume-window {
+    box-shadow: none;
+  }
+
+  .app-title-bar,
+  .download-link,
+  .status-bar {
+    display: none !important;
+  }
+
+  .window-body {
+    margin: 0;
+  }
+
+}

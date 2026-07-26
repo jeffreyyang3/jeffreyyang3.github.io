@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="<%= it.resume.metadata.language %>">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="<%= it.resume.summary %>">
+    <title><%= it.resume.metadata.title %> — Résumé</title>
+    <style>
+<%~ it.css %>
+    </style>
+  </head>
+  <body>
+    <main class="window resume-window">
+      <header class="title-bar app-title-bar">
+        <div class="title-bar-text"><%= it.resume.metadata.title %> — Résumé</div>
+        <div class="title-bar-controls dummy-window-controls" aria-hidden="true">
+          <button type="button" aria-label="Minimize" tabindex="-1"></button>
+          <button type="button" aria-label="Maximize" tabindex="-1"></button>
+          <button type="button" aria-label="Close" tabindex="-1"></button>
+        </div>
+      </header>
+
+      <div class="window-body">
+        <div class="resume-document">
+          <header class="resume-heading">
+            <div>
+              <h1><%= it.resume.metadata.title %></h1>
+              <address class="contact-details">
+                <span><%= it.resume.contact.location %></span>
+                <span><a href="mailto:<%= it.resume.contact.email %>"><%= it.resume.contact.email %></a></span>
+                <% it.resume.contact.profiles.forEach(function (profile) { %>
+                <span><a href="<%= profile.url %>"><%= profile.display %></a></span>
+                <% }) %>
+                <span><a href="tel:<%= it.phoneUri %>"><%= it.resume.contact.phone %></a></span>
+              </address>
+            </div>
+            <a
+              class="download-link"
+              href="<%= it.resume.download.path %>"
+              download="<%= it.resume.download.path %>"
+              type="<%= it.resume.download.mimeType %>"
+            ><%= it.resume.download.label %></a>
+          </header>
+
+          <article class="resume-article" aria-label="Résumé">
+              <section id="summary" aria-label="Summary">
+                <p class="summary-copy"><%= it.resume.summary %></p>
+              </section>
+
+              <section id="experience" aria-labelledby="experience-heading">
+                <h2 id="experience-heading">Experience</h2>
+                <% it.resume.experience.forEach(function (role) { %>
+                <section
+                  class="experience-entry"
+                  id="experience-<%= role.id %>"
+                  aria-labelledby="experience-<%= role.id %>-heading"
+                >
+                  <div class="entry-heading">
+                    <div>
+                      <h3 id="experience-<%= role.id %>-heading"><%= role.company %></h3>
+                      <p class="entry-role">
+                        <strong><%= role.title %></strong>
+                        <% if (role.promotedAt) { %>
+                        <span class="promotion">(promoted <time datetime="<%= role.promotedAt %>"><%= it.formatYearMonth(role.promotedAt) %></time>)</span>
+                        <% } %>
+                      </p>
+                    </div>
+                    <div>
+                      <p class="entry-place"><%= role.location %></p>
+                      <p class="entry-dates">
+                        <time datetime="<%= role.startDate %>"><%= it.formatYearMonth(role.startDate) %></time>
+                        –
+                        <% if (role.endDate) { %>
+                        <time datetime="<%= role.endDate %>"><%= it.formatYearMonth(role.endDate) %></time>
+                        <% } else { %>
+                        Present
+                        <% } %>
+                      </p>
+                    </div>
+                  </div>
+                  <ul>
+                    <% role.highlights.forEach(function (highlight) { %>
+                    <li><%= highlight %></li>
+                    <% }) %>
+                  </ul>
+                </section>
+                <% }) %>
+              </section>
+
+              <section id="education" aria-labelledby="education-heading">
+                <h2 id="education-heading">Education</h2>
+                <% it.resume.education.forEach(function (school) { %>
+                <section
+                  class="education-entry"
+                  id="education-<%= school.id %>"
+                  aria-labelledby="education-<%= school.id %>-heading"
+                >
+                  <div class="entry-heading">
+                    <div>
+                      <h3 id="education-<%= school.id %>-heading"><%= school.institution %></h3>
+                      <p class="entry-role"><%= school.degree %></p>
+                    </div>
+                    <div>
+                      <p class="entry-place"><%= school.location %></p>
+                      <p class="entry-dates"><time datetime="<%= school.graduationYear %>"><%= school.graduationYear %></time></p>
+                    </div>
+                  </div>
+                </section>
+                <% }) %>
+              </section>
+          </article>
+        </div>
+      </div>
+
+      <footer class="status-bar">
+        <p class="status-bar-field">HTML: <%= it.htmlSizeKiB %> KiB</p>
+        <p class="status-bar-field">Made with <a href="https://jdan.github.io/98.css/">98.css</a></p>
+      </footer>
+    </main>
+  </body>
+</html>
