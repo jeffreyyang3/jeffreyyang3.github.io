@@ -81,44 +81,69 @@ test("canonical resume validates and preserves the source facts", () => {
     "Senior software engineer with 5+ years of full-stack experience across consumer and enterprise products.",
   );
   assert.deepEqual(
-    resume.experience.map(({ company, title, startDate, endDate }) => ({
+    resume.experience.map(({ company, positions }) => ({
       company,
-      title,
-      startDate,
-      endDate,
+      positions,
     })),
     [
       {
         company: "Celonis",
-        title: "Senior Software Engineer",
-        startDate: "2023-01",
-        endDate: null,
+        positions: [
+          {
+            title: "Senior Software Engineer",
+            startDate: "2025-10",
+            endDate: "2026-08",
+          },
+          {
+            title: "Software Engineer",
+            startDate: "2023-01",
+            endDate: "2025-10",
+          },
+        ],
       },
       {
         company: "Opendoor",
-        title: "Software Engineer",
-        startDate: "2022-03",
-        endDate: "2022-11",
+        positions: [
+          {
+            title: "Software Engineer",
+            startDate: "2022-03",
+            endDate: "2022-11",
+          },
+        ],
       },
       {
         company: "Poshmark",
-        title: "Software Engineer",
-        startDate: "2021-01",
-        endDate: "2022-02",
+        positions: [
+          {
+            title: "Software Engineer",
+            startDate: "2021-01",
+            endDate: "2022-02",
+          },
+        ],
       },
     ],
   );
-  assert.equal(resume.experience[0].promotedAt, "2025-10");
   assert.deepEqual(
     resume.experience.map(({ highlights }) => highlights.length),
-    [8, 5, 4],
+    [9, 4, 5],
   );
+  assert.deepEqual(resume.technologies, [
+    "Java",
+    "JavaScript/TypeScript",
+    "Spring Boot",
+    "React",
+    "Angular",
+    "Vue",
+    "Ruby on Rails",
+    "MongoDB",
+  ]);
+  assert.equal(Object.hasOwn(resume.contact, "phone"), false);
   assert.deepEqual(resume.education, [
     {
       id: "uc-santa-cruz",
       institution: "University of California, Santa Cruz",
       degree: "B.S. Computer Science",
-      graduationYear: 2020,
+      graduationDate: "2020-12",
       location: "Santa Cruz, CA",
     },
   ]);
@@ -138,12 +163,20 @@ test("schema rejects missing, unknown, and malformed data", () => {
   }, /must NOT have additional properties/u);
 
   expectInvalid((candidate) => {
-    candidate.experience[0].startDate = "Jan 2023";
+    candidate.experience[0].positions[0].startDate = "Jan 2023";
   }, /year-month/u);
 
   expectInvalid((candidate) => {
-    candidate.experience[0].startDate = "2023-13";
+    candidate.experience[0].positions[0].startDate = "2023-13";
   }, /year-month/u);
+
+  expectInvalid((candidate) => {
+    candidate.experience[0].positions = [];
+  }, /must NOT have fewer than 1 items/u);
+
+  expectInvalid((candidate) => {
+    candidate.experience[0].title = "Legacy title";
+  }, /must NOT have additional properties/u);
 
   expectInvalid((candidate) => {
     candidate.contact.email = "not-an-email";
@@ -160,12 +193,8 @@ test("custom validation rejects duplicate IDs and impossible chronology", () => 
   }, /duplicate IDs: celonis/u);
 
   expectInvalid((candidate) => {
-    candidate.experience[1].endDate = "2022-01";
-  }, /opendoor ends before it starts/u);
-
-  expectInvalid((candidate) => {
-    candidate.experience[1].promotedAt = "2023-01";
-  }, /promotion date is outside/u);
+    candidate.experience[1].positions[0].endDate = "2022-01";
+  }, /opendoor Software Engineer ends before it starts/u);
 });
 
 test("validation rejects a missing PDF", () => {
@@ -259,6 +288,7 @@ test("generated HTML has the required semantic structure and links", () => {
     "address",
     "article",
     "section",
+    "h4",
     "time",
   ]) {
     assert.ok(
@@ -283,8 +313,9 @@ test("generated HTML has the required semantic structure and links", () => {
       (link) => attribute(link, "href") === "mailto:jeffreydavidyang@gmail.com",
     ),
   );
-  assert.ok(
-    links.some((link) => attribute(link, "href") === "tel:+16268182618"),
+  assert.equal(
+    links.some((link) => /^tel:/u.test(attribute(link, "href") ?? "")),
+    false,
   );
   assert.ok(
     links.some(
@@ -322,7 +353,48 @@ test("generated HTML has the required semantic structure and links", () => {
   assert.equal(textContent(pdfLink), "Resume PDF");
   assert.equal(attribute(pdfLink, "target"), "_blank");
   assert.equal(attribute(pdfLink, "rel"), "noopener noreferrer");
+  const celonis = nodes.find(
+    (element) => attribute(element, "id") === "experience-celonis",
+  );
+  const celonisPositions = elements(celonis).filter(
+    (element) => element.tagName === "h4",
+  );
+  assert.deepEqual(celonisPositions.map(textContent), [
+    "Senior Software Engineer",
+    "Software Engineer",
+  ]);
+  assert.match(
+    html,
+    /<time datetime="2025-10">Oct 2025<\/time>\s+–\s+<time datetime="2026-08">Aug 2026<\/time>/u,
+  );
+  assert.match(
+    html,
+    /<time datetime="2023-01">Jan 2023<\/time>\s+–\s+<time datetime="2025-10">Oct 2025<\/time>/u,
+  );
+  assert.doesNotMatch(html, /promoted|Present/u);
+
+  const technologies = nodes.find(
+    (element) => attribute(element, "id") === "technologies",
+  );
+  assert.match(
+    textContent(technologies),
+    /Java, JavaScript\/TypeScript, Spring Boot, React, Angular, Vue, Ruby on Rails, MongoDB/u,
+  );
+  const graduationDate = nodes.find(
+    (element) =>
+      element.tagName === "time" &&
+      attribute(element, "datetime") === "2020-12",
+  );
+  assert.equal(textContent(graduationDate), "December 2020");
   assert.doesNotMatch(html, /r\u00e9sum\u00e9/iu);
+});
+
+test("optional phone data renders a callable link when present", () => {
+  const candidate = clone(resume);
+  candidate.contact.phone = "626-818-2618";
+
+  assert.equal(validateResume(candidate, { checkDownloads: false }), candidate);
+  assert.match(renderSite({ resume: candidate }), /href="tel:\+16268182618"/u);
 });
 
 test("resume uses one flat window surface with a solid desktop", () => {

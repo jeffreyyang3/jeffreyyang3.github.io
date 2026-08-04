@@ -31,7 +31,9 @@
                 <% it.resume.contact.profiles.forEach(function (profile) { %>
                 <span><a href="<%= profile.url %>" target="_blank" rel="noopener noreferrer"><%= profile.display %></a></span>
                 <% }) %>
+                <% if (it.resume.contact.phone) { %>
                 <span><a href="tel:<%= it.phoneUri %>"><%= it.resume.contact.phone %></a></span>
+                <% } %>
               </address>
             </div>
             <a
@@ -56,28 +58,25 @@
                   id="experience-<%= role.id %>"
                   aria-labelledby="experience-<%= role.id %>-heading"
                 >
-                  <div class="entry-heading">
-                    <div>
-                      <h3 id="experience-<%= role.id %>-heading"><%= role.company %></h3>
-                      <p class="entry-role">
-                        <strong><%= role.title %></strong>
-                        <% if (role.promotedAt) { %>
-                        <span class="promotion">(promoted <time datetime="<%= role.promotedAt %>"><%= it.formatYearMonth(role.promotedAt) %></time>)</span>
-                        <% } %>
-                      </p>
-                    </div>
-                    <div>
-                      <p class="entry-place"><%= role.location %></p>
+                  <div class="company-heading">
+                    <h3 id="experience-<%= role.id %>-heading"><%= role.company %></h3>
+                    <p class="entry-place"><%= role.location %></p>
+                  </div>
+                  <div class="position-list">
+                    <% role.positions.forEach(function (position) { %>
+                    <div class="position-heading">
+                      <h4><%= position.title %></h4>
                       <p class="entry-dates">
-                        <time datetime="<%= role.startDate %>"><%= it.formatYearMonth(role.startDate) %></time>
+                        <time datetime="<%= position.startDate %>"><%= it.formatYearMonth(position.startDate) %></time>
                         –
-                        <% if (role.endDate) { %>
-                        <time datetime="<%= role.endDate %>"><%= it.formatYearMonth(role.endDate) %></time>
+                        <% if (position.endDate) { %>
+                        <time datetime="<%= position.endDate %>"><%= it.formatYearMonth(position.endDate) %></time>
                         <% } else { %>
                         Present
                         <% } %>
                       </p>
                     </div>
+                    <% }) %>
                   </div>
                   <ul>
                     <% role.highlights.forEach(function (highlight) { %>
@@ -86,6 +85,11 @@
                   </ul>
                 </section>
                 <% }) %>
+              </section>
+
+              <section id="technologies" aria-labelledby="technologies-heading">
+                <h2 id="technologies-heading">Technologies</h2>
+                <p class="technologies-list"><%= it.resume.technologies.join(", ") %></p>
               </section>
 
               <section id="education" aria-labelledby="education-heading">
@@ -103,7 +107,7 @@
                     </div>
                     <div>
                       <p class="entry-place"><%= school.location %></p>
-                      <p class="entry-dates"><time datetime="<%= school.graduationYear %>"><%= school.graduationYear %></time></p>
+                      <p class="entry-dates"><time datetime="<%= school.graduationDate %>"><%= it.formatYearMonth(school.graduationDate, "long") %></time></p>
                     </div>
                   </div>
                 </section>

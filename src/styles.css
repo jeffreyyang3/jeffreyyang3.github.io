@@ -141,6 +141,12 @@ body {
   line-height: 1.25;
 }
 
+.resume-article h4 {
+  margin: 2px 0 0;
+  font-size: 15px;
+  line-height: 1.5;
+}
+
 .summary-copy {
   margin: 0;
   font-size: 17px;
@@ -151,11 +157,17 @@ body {
   margin-top: 26px;
 }
 
-.entry-heading {
+.entry-heading,
+.company-heading,
+.position-heading {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
   gap: 4px 18px;
   align-items: start;
+}
+
+.position-list {
+  margin-top: 2px;
 }
 
 .entry-role,
@@ -173,10 +185,6 @@ body {
   color: #444;
 }
 
-.promotion {
-  font-weight: normal;
-}
-
 .experience-entry ul {
   margin: 10px 0 0;
   padding-left: 22px;
@@ -184,6 +192,10 @@ body {
 
 .experience-entry li + li {
   margin-top: 6px;
+}
+
+.technologies-list {
+  margin: 0;
 }
 
 .status-bar {
@@ -233,7 +245,9 @@ body {
     content: none !important;
   }
 
-  .entry-heading {
+  .entry-heading,
+  .company-heading,
+  .position-heading {
     grid-template-columns: 1fr;
   }
 

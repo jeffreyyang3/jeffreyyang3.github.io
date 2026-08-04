@@ -1,5 +1,5 @@
 {
-  "schemaVersion": "1.0.0",
+  "schemaVersion": "2.0.0",
   "metadata": {
     "title": "Jeffrey Yang",
     "language": "en-US"
@@ -7,7 +7,6 @@
   "contact": {
     "location": "Los Angeles, CA",
     "email": "jeffreydavidyang@gmail.com",
-    "phone": "626-818-2618",
     "profiles": [
       {
         "id": "github",
@@ -28,58 +27,85 @@
     {
       "id": "celonis",
       "company": "Celonis",
-      "title": "Senior Software Engineer",
       "location": "Los Angeles, CA",
-      "startDate": "2023-01",
-      "endDate": null,
-      "promotedAt": "2025-10",
+      "positions": [
+        {
+          "title": "Senior Software Engineer",
+          "startDate": "2025-10",
+          "endDate": "2026-08"
+        },
+        {
+          "title": "Software Engineer",
+          "startDate": "2023-01",
+          "endDate": "2025-10"
+        }
+      ],
       "highlights": [
-        "Owned the Celonis Knowledge Model backend: a user configuration store, and business semantic layer powering all data queries throughout the platform in non-legacy products. Java / Spring Boot",
+        "Owned the Celonis Knowledge Model backend: a user configuration store, and business semantic layer powering all data queries throughout the platform in non-legacy products",
         "Led planning, design, and implementation for product features and engineering initiatives. Coordinated discussion, work and prioritization across multiple engineering teams, product areas, countries",
+        "Reduced latency in main product (Celonis Studio) query execution path from ~600 to ~200ms over a quarter through instrumentation, caching, eager fetching, and cross-team investigation + prioritization",
+        "Primary technical lead for foundational Knowledge Model Object-Centric event logs feature, creating a base framework and philosophy for virtual table use, built upon by other teams in later products.",
         "Heavily utilized Claude Code and Codex for spec-driven agentic engineering, company-wide codebase research, large scale refactoring / codebase maintenance, MCPs (Datadog, Slack, Jira, and more). Created coding standards, reusable scaffolding plans, business context summaries for agents",
-        "Reduced latency in main user facing product (Celonis Studio) query execution path from ~600 to ~200ms over a quarter through instrumentation, optimization, and cross-team investigation + prioritization",
         "Direct technical advisory and implementation for enterprise customers; developed custom migration tooling to enable successful retirement of a legacy product",
         "Created Jest based API testing framework with strongly typed clients, authentication, automated setup and cleanup actively used and contributed to by multiple teams",
-        "Frontend feature development for Q&A based beginner-friendly business data exploration product. Angular / TypeScript",
-        "Tech talks in LA, Bay Area, Munich offices: Playwright integration testing, Latency investigations, custom integration testing framework, philosophical future product and server architecture directions"
+        "Frontend feature development for Q&A based business data explorations Angular application",
+        "Gave tech talks for LA, Bay Area, Munich audiences: Playwright integration testing, Latency investigations, custom integration testing framework, virtual table product / engineering philosophies"
       ]
     },
     {
       "id": "opendoor",
       "company": "Opendoor",
-      "title": "Software Engineer",
       "location": "Los Angeles, CA",
-      "startDate": "2022-03",
-      "endDate": "2022-11",
+      "positions": [
+        {
+          "title": "Software Engineer",
+          "startDate": "2022-03",
+          "endDate": "2022-11"
+        }
+      ],
       "highlights": [
-        "Full stack engineer on Opendoor's home buying experience. React, GraphQL, Ruby on Rails, Mongo.",
-        "Ops-focused work on internal tools for MLS home touring and Opendoor agent experience",
-        "Consumer facing mobile app (React Native) and web feature development for home browsing, tour scheduling, home unlocks",
-        "Wrote design/scoping documents, led planning discussions on my features and more general future initiatives",
+        "Full stack engineer on home browsing experience, and ops-focused internal tooling",
+        "React Native mobile app (React Native) and web feature development for home browsing, tour scheduling, home unlocks",
+        "Rails / MongoDB backend work in operational and marketing SMS, email using Twilio, Litmus",
         "Monitoring, analytics, and analysis using Datadog, Amplitude, Optimizely, Snowflake"
       ]
     },
     {
       "id": "poshmark",
       "company": "Poshmark",
-      "title": "Software Engineer",
       "location": "Redwood City, CA",
-      "startDate": "2021-01",
-      "endDate": "2022-02",
+      "positions": [
+        {
+          "title": "Software Engineer",
+          "startDate": "2021-01",
+          "endDate": "2022-02"
+        }
+      ],
       "highlights": [
-        "Primary frontend engineer for features including bulk closet actions, seller clienteling tools, mobile-web listing creation, and listing tags using Vue.js and Node.",
-        "Produced impact estimates, technical scopes, and post-launch monitoring using clickstream data, Kibana, and Datadog.",
+        "Primary frontend engineer for features including bulk closet actions, seller clienteling tools, mobile-web listing creation, and listing tags using Vue.js and Node",
+        "Wrote documents for technical implementation, scoping, rollout plans.",
+        "Post-launch + continuous monitoring using clickstream data, Kibana, and Datadog",
         "Developed web features to run inside native mobile webviews",
         "Migrated web and mobile features from Rails/jQuery SSR frontend to Vue.js"
       ]
     }
+  ],
+  "technologies": [
+    "Java",
+    "JavaScript/TypeScript",
+    "Spring Boot",
+    "React",
+    "Angular",
+    "Vue",
+    "Ruby on Rails",
+    "MongoDB"
   ],
   "education": [
     {
       "id": "uc-santa-cruz",
       "institution": "University of California, Santa Cruz",
       "degree": "B.S. Computer Science",
-      "graduationYear": 2020,
+      "graduationDate": "2020-12",
       "location": "Santa Cruz, CA"
     }
   ],

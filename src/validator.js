@@ -70,18 +70,13 @@ export function validateResume(
     }
 
     for (const role of resume.experience) {
-      if (role.endDate !== null && role.endDate < role.startDate) {
-        issues.push(`${role.id} ends before it starts`);
-      }
-
-      if (
-        role.promotedAt &&
-        (role.promotedAt < role.startDate ||
-          (role.endDate !== null && role.promotedAt > role.endDate))
-      ) {
-        issues.push(
-          `${role.id} promotion date is outside its employment dates`,
-        );
+      for (const position of role.positions) {
+        if (
+          position.endDate !== null &&
+          position.endDate < position.startDate
+        ) {
+          issues.push(`${role.id} ${position.title} ends before it starts`);
+        }
       }
     }
 

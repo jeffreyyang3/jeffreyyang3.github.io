@@ -10,12 +10,13 @@
     "contact",
     "summary",
     "experience",
+    "technologies",
     "education",
     "download"
   ],
   "properties": {
     "schemaVersion": {
-      "const": "1.0.0"
+      "const": "2.0.0"
     },
     "metadata": {
       "type": "object",
@@ -35,7 +36,7 @@
     "contact": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["location", "email", "phone", "profiles"],
+      "required": ["location", "email", "profiles"],
       "properties": {
         "location": {
           "type": "string",
@@ -88,15 +89,7 @@
       "items": {
         "type": "object",
         "additionalProperties": false,
-        "required": [
-          "id",
-          "company",
-          "title",
-          "location",
-          "startDate",
-          "endDate",
-          "highlights"
-        ],
+        "required": ["id", "company", "location", "positions", "highlights"],
         "properties": {
           "id": {
             "$ref": "#/$defs/id"
@@ -105,32 +98,39 @@
             "type": "string",
             "minLength": 1
           },
-          "title": {
-            "type": "string",
-            "minLength": 1
-          },
           "location": {
             "type": "string",
             "minLength": 1
           },
-          "startDate": {
-            "type": "string",
-            "format": "year-month"
-          },
-          "endDate": {
-            "oneOf": [
-              {
-                "type": "string",
-                "format": "year-month"
-              },
-              {
-                "type": "null"
+          "positions": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["title", "startDate", "endDate"],
+              "properties": {
+                "title": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "startDate": {
+                  "type": "string",
+                  "format": "year-month"
+                },
+                "endDate": {
+                  "oneOf": [
+                    {
+                      "type": "string",
+                      "format": "year-month"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                }
               }
-            ]
-          },
-          "promotedAt": {
-            "type": "string",
-            "format": "year-month"
+            }
           },
           "highlights": {
             "type": "array",
@@ -143,6 +143,15 @@
         }
       }
     },
+    "technologies": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
     "education": {
       "type": "array",
       "minItems": 1,
@@ -153,7 +162,7 @@
           "id",
           "institution",
           "degree",
-          "graduationYear",
+          "graduationDate",
           "location"
         ],
         "properties": {
@@ -168,10 +177,9 @@
             "type": "string",
             "minLength": 1
           },
-          "graduationYear": {
-            "type": "integer",
-            "minimum": 1900,
-            "maximum": 2100
+          "graduationDate": {
+            "type": "string",
+            "format": "year-month"
           },
           "location": {
             "type": "string",

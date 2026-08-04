@@ -38,13 +38,13 @@ function load98Css(rootDirectory) {
   return css.replace(/\/\*# sourceMappingURL=.*?\*\//u, "");
 }
 
-export function formatYearMonth(value) {
-  const [year, month] = value.split("-").map(Number);
+export function formatYearMonth(value, month = "short") {
+  const [year, monthNumber] = value.split("-").map(Number);
   return new Intl.DateTimeFormat("en-US", {
-    month: "short",
+    month,
     year: "numeric",
     timeZone: "UTC",
-  }).format(new Date(Date.UTC(year, month - 1, 1)));
+  }).format(new Date(Date.UTC(year, monthNumber - 1, 1)));
 }
 
 export function renderSite({
@@ -57,7 +57,9 @@ export function renderSite({
     resolve(sourceDirectory, "styles.css"),
     "utf8",
   );
-  const phoneUri = `+1${resume.contact.phone.replaceAll("-", "")}`;
+  const phoneUri = resume.contact.phone
+    ? `+1${resume.contact.phone.replaceAll("-", "")}`
+    : null;
   const render = (htmlSizeKiB) =>
     `${eta
       .renderString(template, {
